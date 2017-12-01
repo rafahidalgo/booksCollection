@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 import { Book } from '../../interfaces/book';
 
 @Component({
@@ -9,9 +9,22 @@ import { Book } from '../../interfaces/book';
 export class HomePage {
 
   booksCollection: Book[] = [];
+  searchedTitle: string;
+  searchebAuthor: string;
 
-  constructor(public navCtrl: NavController) {
+  constructor(private modalCtrl: ModalController) {
 
+  }
+
+  showSearch() {
+    let modal = this.modalCtrl.create('SearchModalPage');
+    modal.present();
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.searchedTitle = data.title;
+        this.searchebAuthor = data.author;
+      }
+    });
   }
 
 }

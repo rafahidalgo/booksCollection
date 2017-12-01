@@ -9,7 +9,7 @@ export class BooksDataProvider {
   }
 
   getBooks() {
-    return this.http.get('../../assets/data/data.json');
+    return this.http.get('');
   }
 
 }
