@@ -8,8 +8,9 @@ export class BooksDataProvider {
     console.log('Hello BooksDataProvider Provider');
   }
 
-  getBooks() {
-    return this.http.get('');
+  getBooks(title?: String, author?: String) {
+    return this.http.get(`https://www.googleapis.com/books/v1/volumes?q=${title}+inauthor:${author}&key=AIzaSyAGLh_QvOsVLGyX337USOQLeWyEj9LJHdw`);
+    //return this.http.get("../../assets/data/data.json");
   }
 
 }

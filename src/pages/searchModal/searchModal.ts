@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController, NavParams } from 'ionic-angular';
+import { IonicPage, ViewController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
   selector: 'page-search-modal',
-  templateUrl: 'search-modal.html',
+  templateUrl: 'searchModal.html',
 })
 export class SearchModalPage {
 
   title: string;
   author: string;
 
-  constructor(public viewCtrl: ViewController,
-              public navParams: NavParams) {
+  constructor(public viewCtrl: ViewController) {
   }
 
-  back() {
+  toSearchPage() {
     this.viewCtrl.dismiss({title: this.title, author: this.author});
   }
 

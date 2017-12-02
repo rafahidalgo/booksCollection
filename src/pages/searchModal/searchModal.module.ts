@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { SearchModalPage } from './search-modal';
+import { SearchModalPage } from './searchModal';
 
 @NgModule({
   declarations: [
