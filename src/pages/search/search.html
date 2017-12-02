@@ -14,7 +14,7 @@
       <p *ngIf="!book.volumeInfo.imageLinks">
         Imagen no disponible
       </p>
-      <h2>{{book.volumeInfo.title}}</h2>
+      <h2>{{book.volumeInfo.title}} · {{book.volumeInfo.authors}}</h2>
       <p *ngIf="book.volumeInfo">{{ book.volumeInfo.description }}</p>
       <p *ngIf="!book.volumeInfo.description">Descripción no disponible</p>
     </ion-item>
