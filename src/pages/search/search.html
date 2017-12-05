@@ -1,7 +1,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>searchPage</ion-title>
+    <ion-title>Búsqueda</ion-title>
+    <ion-buttons end>
+      <button ion-button>
+        Nueva Búsqueda
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -17,6 +22,12 @@
       <h2>{{book.volumeInfo.title}} · {{book.volumeInfo.authors}}</h2>
       <p *ngIf="book.volumeInfo">{{ book.volumeInfo.description }}</p>
       <p *ngIf="!book.volumeInfo.description">Descripción no disponible</p>
+      <ion-buttons end>
+        <button ion-button
+                (click)="addBookToCollection(book)">
+          Añadir
+        </button>
+      </ion-buttons>
     </ion-item>
   </ion-list>
 </ion-content>
