@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
 import { ModalController, ToastController, NavController } from 'ionic-angular';
-import {BooksDataProvider} from '../../providers/books-data/books-data';
+import { BooksDataProvider } from '../../providers/books-data/books-data';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  searchedTitle: string;
-  searchedAuthor: string;
 
   constructor(private modalCtrl: ModalController,
               private toastCtrl: ToastController,
@@ -22,9 +19,7 @@ export class HomePage {
     modal.present();
     modal.onDidDismiss(data => {
       if (data) {
-        this.searchedTitle = data.title;
-        this.searchedAuthor = data.author;
-        this.searchBooks(this.searchedTitle, this.searchedAuthor);
+        this.searchBooks(data.title, data.author);
       } else {
         this.toastCtrl.create({
           message: 'Búsqueda cancelada',
