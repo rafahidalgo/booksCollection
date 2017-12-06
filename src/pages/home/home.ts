@@ -19,7 +19,7 @@ export class HomePage {
     modal.present();
     modal.onDidDismiss(data => {
       if (data) {
-        this.searchBooks(data.title, data.author);
+        this.searchBooks(data.title, data.author, data.isbn);
       } else {
         this.toastCtrl.create({
           message: 'Búsqueda cancelada',
@@ -30,8 +30,8 @@ export class HomePage {
     });
   }
 
-  searchBooks(title: String, author: String) {
-    this.navCtrl.push('SearchPage', {'title': title, 'author': author});
+  searchBooks(title: String, author: String, isbn: Number) {
+    this.navCtrl.push('SearchPage', {'title': title, 'author': author, 'isbn': isbn});
   }
 
 }

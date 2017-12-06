@@ -8,8 +8,16 @@
               (click)="cancel()">
         Cancelar
       </button>
-
     </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button
+              icon-only
+              (click)="scanData()">
+        <ion-icon name="barcode"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
@@ -21,12 +29,17 @@
 
     <ion-item>
       <ion-label floating>Título</ion-label>
-      <ion-input type="text" [(ngModel)]="title"></ion-input>
+      <ion-input [disabled]="isbn!=0" type="text" [(ngModel)]="title" clearInput="true"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Autor</ion-label>
-      <ion-input type="text" [(ngModel)]="author"></ion-input>
+      <ion-input [disabled]="isbn!=0" type="text" [(ngModel)]="author" clearInput="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>ISBN</ion-label>
+      <ion-input type="number" [(ngModel)]="isbn" clearInput="true"></ion-input>
     </ion-item>
 
   </ion-list>

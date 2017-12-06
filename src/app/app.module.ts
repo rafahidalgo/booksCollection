@@ -10,6 +10,10 @@ import { HomePage } from '../pages/home/home';
 import { BooksDataProvider } from '../providers/books-data/books-data';
 import { HttpClientModule } from '@angular/common/http';
 
+//plugins
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -30,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BooksDataProvider,
+    BarcodeScanner
   ]
 })
 export class AppModule {
