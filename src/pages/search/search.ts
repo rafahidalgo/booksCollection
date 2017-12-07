@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavParams } from 'ionic-angular';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { Book } from '../../models/book.model';
-import { ToastController, NavController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -18,8 +18,7 @@ export class SearchPage {
 
   constructor(public navParams: NavParams,
               private booksDataProvider: BooksDataProvider,
-              private toastCtrl: ToastController,
-              private navCtrl: NavController) {
+              private toastCtrl: ToastController) {
 
     this.title = this.navParams.get("title");
     this.author = this.navParams.get("author");
