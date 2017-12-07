@@ -29,12 +29,18 @@
 
     <ion-item>
       <ion-label floating>Título</ion-label>
-      <ion-input [disabled]="isbn!=0" type="text" [(ngModel)]="title" clearInput="true"></ion-input>
+      <ion-input type="text"
+                 [(ngModel)]="title"
+                 clearInput="true"
+                 [disabled]="isbn.length>0"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Autor</ion-label>
-      <ion-input [disabled]="isbn!=0" type="text" [(ngModel)]="author" clearInput="true"></ion-input>
+      <ion-input type="text"
+                 [(ngModel)]="author"
+                 clearInput="true"
+                 [disabled]="isbn.length>0"></ion-input>
     </ion-item>
 
     <ion-item>

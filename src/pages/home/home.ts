@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController, ToastController, NavController } from 'ionic-angular';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
+import { Book } from '../../models/book.model';
 
 @Component({
   selector: 'page-home',
@@ -32,6 +33,11 @@ export class HomePage {
 
   searchBooks(title: String, author: String, isbn: Number) {
     this.navCtrl.push('SearchPage', {'title': title, 'author': author, 'isbn': isbn});
+  }
+
+  delete(book: Book) {
+    let index = this.booksDataProvider.booksCollection.indexOf(book);
+    this.booksDataProvider.booksCollection.splice(index, 1);
   }
 
 }

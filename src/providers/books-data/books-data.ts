@@ -10,7 +10,7 @@ export class BooksDataProvider {
   constructor(private http: HttpClient) {
   }
 
-  getBooks(title: String, author: String, isbn: Number) {
+  getBooks(title: String, author: String, isbn: String) {
     if (title && author && !isbn) {
       return this.http.get(`https://www.googleapis.com/books/v1/volumes?q="${title}"+inauthor:${author}&key=AIzaSyC4bVaIsHrFcf01d0daPuYH9MYx2jZpfLQ`);
     } else if (title && !author && !isbn) {

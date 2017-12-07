@@ -14,7 +14,7 @@ export class SearchPage {
   booksSearched: Book[] = [];
   title: String;
   author: String;
-  isbn: Number;
+  isbn: String;
 
   constructor(public navParams: NavParams,
               private booksDataProvider: BooksDataProvider,
