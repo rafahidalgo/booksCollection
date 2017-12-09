@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ModalController, ToastController, NavController } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { Book } from '../../models/book.model';
+import { MessagesProvider } from '../../providers/messages/messages';
 
 @Component({
   selector: 'page-home',
@@ -10,9 +11,9 @@ import { Book } from '../../models/book.model';
 export class HomePage {
 
   constructor(private modalCtrl: ModalController,
-              private toastCtrl: ToastController,
               private navCtrl: NavController,
-              public booksDataProvider: BooksDataProvider) {
+              public booksDataProvider: BooksDataProvider,
+              private messagesProvider: MessagesProvider) {
   }
 
   searchModal() {
@@ -22,11 +23,7 @@ export class HomePage {
       if (data) {
         this.searchBooks(data.title, data.author, data.isbn);
       } else {
-        this.toastCtrl.create({
-          message: 'Búsqueda cancelada',
-          duration: 1000,
-          position: "middle"
-        }).present();
+        this.messagesProvider.createBasicAlert("Búsqueda cancelada");
       }
     });
   }

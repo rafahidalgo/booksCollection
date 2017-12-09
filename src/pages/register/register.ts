@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController, Loading, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, Loading } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
 import { EmailValidator } from '../../validators/email';
 import { HomePage } from '../home/home';
+import { MessagesProvider} from '../../providers/messages/messages';
 
 
 @IonicPage()
@@ -20,7 +21,7 @@ export class RegisterPage {
               private authenticationProvider: AuthenticationProvider,
               private formBuilder: FormBuilder,
               private loadingCtrl: LoadingController,
-              private alertCtrl: AlertController) {
+              private messagesProvider: MessagesProvider) {
 
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -39,15 +40,7 @@ export class RegisterPage {
           this.navCtrl.setRoot(HomePage);
         }), error => {
         this.loading.dismiss().then(() => {
-          this.alertCtrl.create({
-            message: error.message,
-            buttons: [
-              {
-                text: "Ok",
-                role: "cancel"
-              }
-            ]
-          }).present();
+          this.messagesProvider.createBasicAlert(error.message);
         });
       };
       this.loading = this.loadingCtrl.create({

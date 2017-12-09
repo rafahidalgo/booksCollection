@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavParams } from 'ionic-angular';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { Book } from '../../models/book.model';
-import { ToastController } from 'ionic-angular';
+import { MessagesProvider } from '../../providers/messages/messages';
 
 @IonicPage()
 @Component({
@@ -18,7 +18,7 @@ export class SearchPage {
 
   constructor(public navParams: NavParams,
               private booksDataProvider: BooksDataProvider,
-              private toastCtrl: ToastController) {
+              private messagesProvider: MessagesProvider) {
 
     this.title = this.navParams.get("title");
     this.author = this.navParams.get("author");
@@ -33,20 +33,12 @@ export class SearchPage {
   addBookToCollection(bookToAdd: any) {
     for (let books of this.booksDataProvider.booksCollection) {
       if (books.volumeInfo.title == bookToAdd.volumeInfo.title) {
-        this.toastCtrl.create({
-          message: "El libro ya se encuentra en la colección",
-          duration: 1500,
-          position: "middle"
-        }).present();
+        this.messagesProvider.createBasicAlert("El libro ya se encuentra en la colección");
         return;
       }
     }
     this.booksDataProvider.booksCollection.push(bookToAdd);
-    this.toastCtrl.create({
-      message: "Libro añadido con éxito",
-      duration: 1000,
-      position: "middle"
-    }).present();
+    this.messagesProvider.createToast("Libro añadido con éxito", 1000, "middle");
   }
 
   newSearch() {

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Loading, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, Loading, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
 import { HomePage } from '../home/home';
 import { EmailValidator } from '../../validators/email';
 import { ResetPasswordPage } from '../reset-password/reset-password';
 import { RegisterPage } from '../register/register';
+import {MessagesProvider} from '../../providers/messages/messages';
 
 
 @IonicPage()
@@ -20,15 +21,14 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController,
               private loadingCtrl: LoadingController,
-              private alertCtrl: AlertController,
               private formBuilder: FormBuilder,
-              private authenticationProvider: AuthenticationProvider) {
+              private authenticationProvider: AuthenticationProvider,
+              private messagesProvider: MessagesProvider) {
 
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     });
-
 
   }
 
@@ -41,15 +41,7 @@ export class LoginPage {
         this.navCtrl.setRoot(HomePage);
       }, error => {
         this.loading.dismiss().then(() => {
-          this.alertCtrl.create({
-            message: "No hay ningún usuario con esa dirección de email",
-            buttons: [
-              {
-                text: "Ok",
-                role: 'cancel'
-              }
-            ]
-          }).present();
+          this.messagesProvider.createBasicAlert("No hay ningún usuario con esas dirección de correo");
         });
       });
       this.loading = this.loadingCtrl.create({
@@ -58,7 +50,6 @@ export class LoginPage {
       this.loading.present();
     }
   }
-
 
   goToResetPassword() {
     this.navCtrl.push('ResetPasswordPage');
