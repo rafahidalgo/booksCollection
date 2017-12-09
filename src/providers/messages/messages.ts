@@ -33,6 +33,7 @@ export class MessagesProvider {
   createLoading() {
     this.loadingCtrl.create({
       dismissOnPageChange: true,
+      enableBackdropDismiss: true,
       content: "Por favor, espere..."
     }).present();
   }
