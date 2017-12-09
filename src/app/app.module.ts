@@ -17,6 +17,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthenticationProvider } from '../providers/authentication/authentication';
+import { MessagesProvider } from '../providers/messages/messages';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr2rBFMRaNmrN6VTF_JzQpT4kLX_OZiG4",
@@ -51,7 +53,9 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BooksDataProvider,
     BarcodeScanner,
-    AngularFireDatabase
+    AngularFireDatabase,
+    AuthenticationProvider,
+    MessagesProvider
   ]
 })
 export class AppModule {
