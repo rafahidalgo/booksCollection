@@ -37,4 +37,8 @@ export class HomePage {
     this.booksDataProvider.booksCollection.splice(index, 1);
   }
 
+  goToDetails(book: Book) {
+    this.navCtrl.push("DetailsPage", {"book": book});
+  }
+
 }
