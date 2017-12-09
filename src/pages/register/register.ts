@@ -5,6 +5,7 @@ import { AuthenticationProvider } from '../../providers/authentication/authentic
 import { EmailValidator } from '../../validators/email';
 import { HomePage } from '../home/home';
 import { MessagesProvider } from '../../providers/messages/messages';
+import { StorageProvider } from '../../providers/storage/storage';
 
 
 @IonicPage()
@@ -22,7 +23,8 @@ export class RegisterPage {
               private authenticationProvider: AuthenticationProvider,
               private formBuilder: FormBuilder,
               private loadingCtrl: LoadingController,
-              private messagesProvider: MessagesProvider) {
+              private messagesProvider: MessagesProvider,
+              private storageProvider: StorageProvider) {
 
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -37,7 +39,8 @@ export class RegisterPage {
       console.log(this.registerForm.value);
     } else {
       this.authenticationProvider.register(this.registerForm.value.email, this.registerForm.value.password)
-        .then(() => {
+        .then((authenticationData) => {
+          this.storageProvider.userId = authenticationData.uid;
           this.navCtrl.setRoot(HomePage);
         }, error => {
           this.loading.dismiss().then(() => {

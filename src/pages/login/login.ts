@@ -7,6 +7,7 @@ import { EmailValidator } from '../../validators/email';
 import { ResetPasswordPage } from '../reset-password/reset-password';
 import { RegisterPage } from '../register/register';
 import { MessagesProvider } from '../../providers/messages/messages';
+import { StorageProvider } from '../../providers/storage/storage';
 
 
 @IonicPage()
@@ -23,7 +24,8 @@ export class LoginPage {
               private loadingCtrl: LoadingController,
               private formBuilder: FormBuilder,
               private authenticationProvider: AuthenticationProvider,
-              private messagesProvider: MessagesProvider) {
+              private messagesProvider: MessagesProvider,
+              private storageProvider: StorageProvider) {
 
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -39,12 +41,13 @@ export class LoginPage {
     } else {
       this.authenticationProvider.login(this.loginForm.value.email, this.loginForm.value.password)
         .then(authenticationData => {
-        this.navCtrl.setRoot(HomePage);
-      }, error => {
-        this.loading.dismiss().then(() => {
-          this.messagesProvider.createBasicAlert("No hay ningún usuario con esa dirección de correo");
+          this.storageProvider.userId = authenticationData.uid;
+          this.navCtrl.setRoot(HomePage);
+        }, error => {
+          this.loading.dismiss().then(() => {
+            this.messagesProvider.createBasicAlert("No hay ningún usuario con esa dirección de correo");
+          });
         });
-      });
       this.loading = this.loadingCtrl.create({
         dismissOnPageChange: true,
       });

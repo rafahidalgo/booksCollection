@@ -19,6 +19,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthenticationProvider } from '../providers/authentication/authentication';
 import { MessagesProvider } from '../providers/messages/messages';
+import { StorageProvider } from '../providers/storage/storage';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr2rBFMRaNmrN6VTF_JzQpT4kLX_OZiG4",
@@ -55,7 +56,8 @@ export const firebaseConfig = {
     BarcodeScanner,
     AngularFireDatabase,
     AuthenticationProvider,
-    MessagesProvider
+    MessagesProvider,
+    StorageProvider
   ]
 })
 export class AppModule {

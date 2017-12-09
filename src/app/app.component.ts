@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { StorageProvider } from '../providers/storage/storage';
+import { BooksDataProvider } from '../providers/books-data/books-data';
+import { AuthenticationProvider } from '../providers/authentication/authentication';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +18,10 @@ export class MyApp {
   constructor(platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
-              angularFireAuth: AngularFireAuth) {
+              angularFireAuth: AngularFireAuth,
+              private storageProvider: StorageProvider,
+              private booksDataProvider: BooksDataProvider,
+              private authenticationProvider: AuthenticationProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -25,6 +31,12 @@ export class MyApp {
 
     const authObserver = angularFireAuth.authState.subscribe(user => {
       if (user) {
+        /*this.storageProvider.getUserData(user);
+        this.storageProvider.books.subscribe(books => {
+          this.booksDataProvider.booksCollection = books
+        });
+        console.log(this.booksDataProvider.booksCollection);*/
+        this.storageProvider.userId = user.uid;
         this.rootPage = HomePage;
         authObserver.unsubscribe();
       } else {
