@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { MessagesProvider} from '../../providers/messages/messages';
+import { MessagesProvider } from '../../providers/messages/messages';
+
 
 @IonicPage()
 @Component({

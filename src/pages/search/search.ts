@@ -27,7 +27,7 @@ export class SearchPage {
     this.booksDataProvider.getBooks(this.title, this.author, this.isbn).subscribe((books) =>
       this.booksSearched = books["items"]
     );
-
+    this.messagesProvider.createLoading();
   }
 
   addBookToCollection(bookToAdd: any) {

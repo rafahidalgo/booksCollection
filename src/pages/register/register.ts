@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
 import { EmailValidator } from '../../validators/email';
 import { HomePage } from '../home/home';
-import { MessagesProvider} from '../../providers/messages/messages';
+import { MessagesProvider } from '../../providers/messages/messages';
 
 
 @IonicPage()
@@ -15,6 +15,7 @@ import { MessagesProvider} from '../../providers/messages/messages';
 export class RegisterPage {
 
   registerForm: FormGroup;
+
   loading: Loading;
 
   constructor(public navCtrl: NavController,
@@ -38,11 +39,11 @@ export class RegisterPage {
       this.authenticationProvider.register(this.registerForm.value.email, this.registerForm.value.password)
         .then(() => {
           this.navCtrl.setRoot(HomePage);
-        }), error => {
-        this.loading.dismiss().then(() => {
-          this.messagesProvider.createBasicAlert(error.message);
+        }, error => {
+          this.loading.dismiss().then(() => {
+            this.messagesProvider.createBasicAlert(error.message);
+          });
         });
-      };
       this.loading = this.loadingCtrl.create({
         dismissOnPageChange: true
       });
