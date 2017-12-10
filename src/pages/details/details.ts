@@ -16,7 +16,6 @@ export class DetailsPage {
               public navParams: NavParams) {
 
     this.book = this.navParams.get("book");
-    console.log(this.book);
 
   }
 

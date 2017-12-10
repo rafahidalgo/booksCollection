@@ -5,6 +5,7 @@ import { Book } from '../../models/book.model';
 @Injectable()
 export class BooksDataProvider {
 
+  booksFirebase: any[] = [];
   booksCollection: Book[] = [];
 
   constructor(private http: HttpClient) {

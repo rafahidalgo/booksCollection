@@ -19,23 +19,16 @@ export class MyApp {
               statusBar: StatusBar,
               splashScreen: SplashScreen,
               angularFireAuth: AngularFireAuth,
-              private storageProvider: StorageProvider,
-              private booksDataProvider: BooksDataProvider,
-              private authenticationProvider: AuthenticationProvider) {
+              private storageProvider: StorageProvider) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+
+
       statusBar.styleDefault();
       splashScreen.hide();
     });
 
     const authObserver = angularFireAuth.authState.subscribe(user => {
       if (user) {
-        /*this.storageProvider.getUserData(user);
-        this.storageProvider.books.subscribe(books => {
-          this.booksDataProvider.booksCollection = books
-        });
-        console.log(this.booksDataProvider.booksCollection);*/
         this.storageProvider.userId = user.uid;
         this.rootPage = HomePage;
         authObserver.unsubscribe();

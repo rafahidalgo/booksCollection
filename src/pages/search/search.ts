@@ -12,7 +12,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 })
 export class SearchPage {
 
-  booksSearched: Book[] = [];
+  booksSearched: Book[];
   title: String;
   author: String;
   isbn: String;
