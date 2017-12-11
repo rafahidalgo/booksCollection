@@ -31,10 +31,14 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
-    this.storageProvider.getCollection().subscribe(books => {
+    //Desde Firebase
+    /*this.storageProvider.getCollection().subscribe(books => {
       this.booksDataProvider.booksFirebase = books;
       this.booksDataProvider.booksCollection = this.booksDataProvider.booksFirebase;
     });
+*/
+    //Desde LocalStorage
+    this.storageProvider.loadLocalStorage();
   }
 
   searchBooks(title: String, author: String, isbn: Number) {
@@ -43,8 +47,9 @@ export class HomePage {
 
   delete(book: Book) {
     let index = this.booksDataProvider.booksCollection.indexOf(book);
-    this.booksDataProvider.booksCollection.splice(index, 1);
-    this.storageProvider.deleteBookFireBase(book);
+    this.storageProvider.deleteBookFireBase(book); //borrar libro de firebase
+    this.booksDataProvider.booksCollection.splice(index, 1); //borrar libro del array
+    this.storageProvider.saveLocalStorage(); //Guardar el array sin el libro borrado en localStorage
   }
 
   goToDetails(book: Book) {

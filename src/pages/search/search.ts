@@ -47,8 +47,9 @@ export class SearchPage {
         return;
       }
     }
-    this.storageProvider.uploadBook(bookToAdd);
-    this.booksDataProvider.booksCollection.push(bookToAdd);
+    this.storageProvider.uploadBook(bookToAdd); //Guardar libro en firebase
+    this.booksDataProvider.booksCollection.push(bookToAdd); //Añadir libro al array de libros
+    this.storageProvider.saveLocalStorage(); //Guardar el array con el nuevo libro en localStorage
     this.messagesProvider.createToast("Libro añadido con éxito", 1000, "middle");
   }
 
