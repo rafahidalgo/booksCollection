@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { MessagesProvider } from '../../providers/messages/messages';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { Book } from '../../models/book.model';
-import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
 
+@IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-cover',
+  templateUrl: 'cover.html',
 })
-export class HomePage {
+export class CoverPage {
 
-  constructor(private modalCtrl: ModalController,
-              private navCtrl: NavController,
-              public booksDataProvider: BooksDataProvider,
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private modalCtrl: ModalController,
               private messagesProvider: MessagesProvider,
+              public booksDataProvider: BooksDataProvider,
               private storageProvider: StorageProvider) {
 
     //Desde Firebase
@@ -29,10 +31,11 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    this.storageProvider.tab = 0;
+    this.storageProvider.tab = 1;
     this.storageProvider.saveLastTab();
   }
 
+  //Función repetida de HomePage
   searchModal() {
     let modal = this.modalCtrl.create('SearchModalPage');
     modal.present();
@@ -45,17 +48,12 @@ export class HomePage {
     });
   }
 
+  //Función repetida de HomePage
   searchBooks(title: String, author: String, isbn: Number) {
     this.navCtrl.push('SearchPage', {'title': title, 'author': author, 'isbn': isbn});
   }
 
-  delete(book: Book) {
-    let index = this.booksDataProvider.booksCollection.indexOf(book);
-    this.storageProvider.deleteBookFireBase(book); //borrar libro de firebase
-    this.booksDataProvider.booksCollection.splice(index, 1); //borrar libro del array
-    this.storageProvider.saveLocalStorage(); //Guardar el array sin el libro borrado en localStorage
-  }
-
+  //Función repetida de HomePage
   goToDetails(book: Book) {
     this.navCtrl.push("DetailsPage", {"book": book});
   }

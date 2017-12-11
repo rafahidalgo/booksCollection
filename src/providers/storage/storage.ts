@@ -16,6 +16,7 @@ export class StorageProvider {
 
   books: any;
   userId: string;
+  tab: number = 0;
 
 
   constructor(private angularFireDatabase: AngularFireDatabase,
@@ -45,6 +46,48 @@ export class StorageProvider {
     return Promise;
   }
 
+  saveLastTab(){
+    let promise = new Promise((resolve, reject) => {
+      if (this.platform.is('cordova')) {
+        //Device
+        this.storage.ready().then(() => {
+          this.storage.set(`tab${this.userId}`, this.tab);
+          resolve();
+        });
+      } else {
+        //Desktop
+        localStorage.setItem(`tab${this.userId}`, JSON.stringify(this.tab));
+        resolve();
+      }
+    });
+    return Promise;
+  }
+
+  loadLastTab(){
+    let promise = new Promise(((resolve, reject) => {
+      if (this.platform.is('cordova')) {
+        //Dispositivo
+        this.storage.ready().then(() => {
+          this.storage.get(`tab${this.userId}`).then(tab => {
+            if (tab) { //Por si viniera vacío
+              this.tab = tab;
+            }
+            resolve(); //Si no existe tab, se deja como está (por defecto a 0)
+          });
+        });
+      } else {
+        //Escritorio
+        if (localStorage.getItem(`tab${this.userId}`)) {
+          this.tab = JSON.parse(localStorage.getItem(`tab${this.userId}`));
+        }
+        resolve();
+      }
+
+    }));
+    return Promise;
+  }
+
+
   deleteBookFireBase(book: Book) {
     this.angularFireDatabase.object(`users/${this.userId}/${book.id}`).remove();
   }
@@ -58,12 +101,12 @@ export class StorageProvider {
       if (this.platform.is('cordova')) {
         //Dispositivo
         this.storage.ready().then(() => {
-          this.storage.get(`books${this.userId}`).then((books => {
+          this.storage.get(`books${this.userId}`).then(books => {
             if (books) { //Por si viniera vacío
               this.booksDataProvider.booksCollection = books;
             }
             resolve();
-          }));
+          });
         });
       } else {
         //Escritorio
