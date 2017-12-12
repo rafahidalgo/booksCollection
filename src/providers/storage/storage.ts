@@ -46,17 +46,17 @@ export class StorageProvider {
     return Promise;
   }
 
-  saveLastTab(){
+  saveLastTab(tab: number){
     let promise = new Promise((resolve, reject) => {
       if (this.platform.is('cordova')) {
         //Device
         this.storage.ready().then(() => {
-          this.storage.set(`tab${this.userId}`, this.tab);
+          this.storage.set(`tab${this.userId}`, tab);
           resolve();
         });
       } else {
         //Desktop
-        localStorage.setItem(`tab${this.userId}`, JSON.stringify(this.tab));
+        localStorage.setItem(`tab${this.userId}`, JSON.stringify(tab));
         resolve();
       }
     });
@@ -92,9 +92,13 @@ export class StorageProvider {
     this.angularFireDatabase.object(`users/${this.userId}/${book.id}`).remove();
   }
 
-  getCollection() {
+  getCollection(){
     return this.angularFireDatabase.list(`users/${this.userId}`).valueChanges();
   }
+
+  /*retrieveCollectionFirebase(){
+
+  }*/
 
   loadLocalStorage() {
     let promise = new Promise(((resolve, reject) => {

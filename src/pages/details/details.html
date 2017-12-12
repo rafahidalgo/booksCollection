@@ -14,7 +14,13 @@
       <ion-grid>
         <ion-row>
           <ion-col col-6>
-            <img [src]="book.volumeInfo.imageLinks.thumbnail"/>
+            <!-- Si existe carátula -->
+            <img *ngIf="book.volumeInfo.imageLinks"
+                 [src]="book.volumeInfo.imageLinks.thumbnail" alt="portada">
+            <!-- Si no existe carátula -->
+            <img *ngIf="!book.volumeInfo.imageLinks"
+                 src="http://via.placeholder.com/150x180"
+                 alt="no-portada">
           </ion-col>
           <ion-col col-6>
             <ion-row>

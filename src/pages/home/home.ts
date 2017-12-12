@@ -4,6 +4,8 @@ import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { Book } from '../../models/book.model';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
+import { AuthenticationProvider } from '../../providers/authentication/authentication';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'page-home',
@@ -11,26 +13,40 @@ import { StorageProvider } from '../../providers/storage/storage';
 })
 export class HomePage {
 
+  subs: Subscription;
+
   constructor(private modalCtrl: ModalController,
               private navCtrl: NavController,
               public booksDataProvider: BooksDataProvider,
               private messagesProvider: MessagesProvider,
-              private storageProvider: StorageProvider) {
+              private storageProvider: StorageProvider,
+              private authenticationProvider: AuthenticationProvider) {
 
-    //Desde Firebase
-    /*this.storageProvider.getCollection().subscribe(books => {
-      this.booksDataProvider.booksFirebase = books;
-      this.booksDataProvider.booksCollection = this.booksDataProvider.booksFirebase;
-    });
-*/
-    //Desde LocalStorage
-    this.storageProvider.loadLocalStorage();
+
 
   }
 
   ionViewDidLoad(){
-    this.storageProvider.tab = 0;
-    this.storageProvider.saveLastTab();
+    //Desde Firebase
+    if (this.authenticationProvider.logged) {
+      this.subs = this.storageProvider.getCollection().subscribe(books => {
+        this.booksDataProvider.booksFirebase = books;
+        this.booksDataProvider.booksCollection = this.booksDataProvider.booksFirebase;
+      });
+    } else {
+      //Desde LocalStorage
+      this.storageProvider.loadLocalStorage();
+    }
+  }
+
+  ionViewDidEnter() {
+    this.storageProvider.saveLastTab(0);
+  }
+
+  ngOnDestroy(){
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
   }
 
   searchModal() {
@@ -51,7 +67,9 @@ export class HomePage {
 
   delete(book: Book) {
     let index = this.booksDataProvider.booksCollection.indexOf(book);
-    this.storageProvider.deleteBookFireBase(book); //borrar libro de firebase
+    if (this.authenticationProvider.logged) {
+      this.storageProvider.deleteBookFireBase(book); //borrar libro de firebase
+    }
     this.booksDataProvider.booksCollection.splice(index, 1); //borrar libro del array
     this.storageProvider.saveLocalStorage(); //Guardar el array sin el libro borrado en localStorage
   }
@@ -59,5 +77,6 @@ export class HomePage {
   goToDetails(book: Book) {
     this.navCtrl.push("DetailsPage", {"book": book});
   }
+
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController } from 'ionic-angular';
+import { IonicPage, ViewController, LoadingController, Loading } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { MessagesProvider } from '../../providers/messages/messages';
 
@@ -17,19 +17,29 @@ export class SearchModalPage {
 
   constructor(private viewCtrl: ViewController,
               private barcodeScanner: BarcodeScanner,
-              private messagesProvider: MessagesProvider) {
+              private messagesProvider: MessagesProvider,
+              private loadingCtrl: LoadingController) {
   }
 
   toSearchPage() {
     if (this.isbn.length > 0) {
       if (this.isbn.length == 13 && (this.isbn.startsWith("978") || this.isbn.startsWith("979"))) {
         this.viewCtrl.dismiss({title: this.title, author: this.author, isbn: this.isbn});
+        this.messagesProvider.loading = this.loadingCtrl.create({
+          content: "Por favor, espere..."
+        });
+        this.messagesProvider.loading.present();
       } else {
         this.messagesProvider.createBasicAlert("No es un códio ISBN válido");
       }
     } else {
       this.viewCtrl.dismiss({title: this.title, author: this.author, isbn: this.isbn});
+      this.messagesProvider.loading = this.loadingCtrl.create({
+        content: "Por favor, espere..."
+      });
+      this.messagesProvider.loading.present();
     }
+
   }
 
   scanData() {

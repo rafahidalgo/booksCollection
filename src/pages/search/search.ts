@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { IonicPage, Loading, LoadingController, NavParams } from 'ionic-angular';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { Book } from '../../models/book.model';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
+import { AuthenticationProvider } from '../../providers/authentication/authentication';
+import { Observable } from 'rxjs/Observable';
+import { SearchModalPage } from '../searchModal/searchModal';
+import { Subscription } from 'rxjs/Subscription';
+
 
 @IonicPage()
 @Component({
@@ -12,33 +17,43 @@ import { StorageProvider } from '../../providers/storage/storage';
 })
 export class SearchPage {
 
-  booksSearched: Book[];
+  booksSearched: Observable<any[]>;
   title: String;
   author: String;
   isbn: String;
-
-  loading: Loading;
+  subs: Subscription;
 
   constructor(public navParams: NavParams,
               private booksDataProvider: BooksDataProvider,
               private messagesProvider: MessagesProvider,
               private loadingCtrl: LoadingController,
-              private storageProvider: StorageProvider) {
+              private storageProvider: StorageProvider,
+              private authenticationProvider: AuthenticationProvider) {
 
     this.title = this.navParams.get("title");
     this.author = this.navParams.get("author");
     this.isbn = this.navParams.get("isbn");
 
-    this.booksDataProvider.getBooks(this.title, this.author, this.isbn).subscribe((books) => {
+    this.subs = this.booksDataProvider.getBooks(this.title, this.author, this.isbn).subscribe((books) => {
         this.booksSearched = books["items"];
-        this.loading.dismiss();
+        this.messagesProvider.loading.dismiss();
       }
     );
-    this.loading = this.loadingCtrl.create({
-      content: "Por favor, espere..."
-    });
-    this.loading.present();
+
   }
+
+  ionViewDidLeave() {
+    this.subs.unsubscribe();
+  }
+
+  ngOnDestroy(){
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
+  }
+
+
+
 
   addBookToCollection(bookToAdd: any) {
     for (let books of this.booksDataProvider.booksCollection) {
@@ -47,9 +62,14 @@ export class SearchPage {
         return;
       }
     }
-    this.storageProvider.uploadBook(bookToAdd); //Guardar libro en firebase
+    if (this.authenticationProvider.logged) {
+      this.storageProvider.uploadBook(bookToAdd); //Guardar libro en firebase
+      console.log("Firebase guardado!");
+    }
     this.booksDataProvider.booksCollection.push(bookToAdd); //Añadir libro al array de libros
+    console.log("array guardado!");
     this.storageProvider.saveLocalStorage(); //Guardar el array con el nuevo libro en localStorage
+    console.log("local guardado!");
     this.messagesProvider.createToast("Libro añadido con éxito", 1000, "middle");
   }
 

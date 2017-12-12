@@ -6,6 +6,7 @@ import { EmailValidator } from '../../validators/email';
 import { HomePage } from '../home/home';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
+import { TabsPage } from '../tabs/tabs';
 
 
 @IonicPage()
@@ -41,7 +42,8 @@ export class RegisterPage {
       this.authenticationProvider.register(this.registerForm.value.email, this.registerForm.value.password)
         .then((authenticationData) => {
           this.storageProvider.userId = authenticationData.uid;
-          this.navCtrl.setRoot(HomePage);
+          this.authenticationProvider.logged = true;
+          this.navCtrl.setRoot(TabsPage);
         }, error => {
           this.loading.dismiss().then(() => {
             this.messagesProvider.createBasicAlert(error.message);

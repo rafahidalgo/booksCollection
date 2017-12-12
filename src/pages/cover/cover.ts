@@ -4,6 +4,8 @@ import { MessagesProvider } from '../../providers/messages/messages';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { Book } from '../../models/book.model';
 import { StorageProvider } from '../../providers/storage/storage';
+import { AuthenticationProvider } from '../../providers/authentication/authentication';
+import { Subscription } from 'rxjs/Subscription';
 
 @IonicPage()
 @Component({
@@ -12,27 +14,40 @@ import { StorageProvider } from '../../providers/storage/storage';
 })
 export class CoverPage {
 
+  subs: Subscription;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private modalCtrl: ModalController,
               private messagesProvider: MessagesProvider,
               public booksDataProvider: BooksDataProvider,
-              private storageProvider: StorageProvider) {
+              private storageProvider: StorageProvider,
+              private authenticationProvider: AuthenticationProvider) {
 
-    //Desde Firebase
-    /*this.storageProvider.getCollection().subscribe(books => {
-      this.booksDataProvider.booksFirebase = books;
-      this.booksDataProvider.booksCollection = this.booksDataProvider.booksFirebase;
-    });
-*/
-    //Desde LocalStorage
-    this.storageProvider.loadLocalStorage();
 
   }
 
-  ionViewDidLoad(){
-    this.storageProvider.tab = 1;
-    this.storageProvider.saveLastTab();
+  ionViewDidLoad() {
+    //Desde Firebase
+    if (this.authenticationProvider.logged) {
+      this.subs = this.storageProvider.getCollection().subscribe(books => {
+        this.booksDataProvider.booksFirebase = books;
+        this.booksDataProvider.booksCollection = this.booksDataProvider.booksFirebase;
+      });
+    } else {
+      //Desde LocalStorage
+      this.storageProvider.loadLocalStorage();
+    }
+  }
+
+  ionViewDidEnter() {
+    this.storageProvider.saveLastTab(1);
+  }
+
+  ngOnDestroy(){
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
   }
 
   //Función repetida de HomePage

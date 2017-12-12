@@ -6,6 +6,8 @@ import firebase from 'firebase/app'
 @Injectable()
 export class AuthenticationProvider {
 
+  logged: boolean;
+
   constructor(private angularFireAuth: AngularFireAuth) {
   }
 
@@ -20,7 +22,7 @@ export class AuthenticationProvider {
   }
 
   //Logout
-  logOut(): Promise<void> {
+  logout(): Promise<void> {
     return this.angularFireAuth.auth.signOut();
   }
 

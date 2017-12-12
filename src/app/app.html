@@ -9,8 +9,14 @@
   <ion-content>
     <ion-list>
 
-      <button ion-item (click)="openPage('LoginPage')">
-        Login
+      <button *ngIf="!authenticationProvider.logged"
+        ion-item (click)="openPage('LoginPage')">
+        Iniciar sesión
+      </button>
+
+      <button *ngIf="authenticationProvider.logged"
+        ion-item (click)="logout()">
+        Cerrar sesión
       </button>
 
       <button ion-item (click)="openPage(homePage)">

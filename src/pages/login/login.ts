@@ -8,6 +8,7 @@ import { ResetPasswordPage } from '../reset-password/reset-password';
 import { RegisterPage } from '../register/register';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
+import { TabsPage } from '../tabs/tabs';
 
 
 @IonicPage()
@@ -37,12 +38,12 @@ export class LoginPage {
   login() {
     if (!this.loginForm.valid) {
       //TODO mostrar error
-      console.log(this.loginForm.value);
     } else {
       this.authenticationProvider.login(this.loginForm.value.email, this.loginForm.value.password)
         .then(authenticationData => {
           this.storageProvider.userId = authenticationData.uid;
-          this.navCtrl.setRoot(HomePage);
+          this.authenticationProvider.logged = true;
+          this.navCtrl.setRoot(TabsPage);
         }, error => {
           this.loading.dismiss().then(() => {
             this.messagesProvider.createBasicAlert("No hay ningún usuario con esa dirección de correo");

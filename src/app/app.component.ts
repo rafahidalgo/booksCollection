@@ -5,8 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { StorageProvider } from '../providers/storage/storage';
+import { AuthenticationProvider } from '../providers/authentication/authentication';
 import { TabsPage } from '../pages/tabs/tabs';
-import {HomePage} from '../pages/home/home';
+import { HomePage } from '../pages/home/home';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class MyApp {
               splashScreen: SplashScreen,
               angularFireAuth: AngularFireAuth,
               private storageProvider: StorageProvider,
-              private menuCtrl: MenuController) {
+              private menuCtrl: MenuController,
+              public authenticationProvider: AuthenticationProvider) {
     platform.ready().then(() => {
 
 
@@ -36,7 +38,8 @@ export class MyApp {
         this.rootPage = TabsPage;
         authObserver.unsubscribe();
       } else {
-        this.rootPage = 'LoginPage';
+        this.storageProvider.userId = "0"; //Usuario invitado
+        this.rootPage = TabsPage;
         authObserver.unsubscribe();
       }
     });
@@ -46,6 +49,15 @@ export class MyApp {
   openPage(page: any) {
     this.rootPage = page;
     this.menuCtrl.close();
+  }
+
+  logout() {
+    this.authenticationProvider.logout().then(() => {
+      this.authenticationProvider.logged = false;
+      this.storageProvider.userId = "0";
+      this.storageProvider.getCollection();
+      this.openPage(TabsPage);
+    });
   }
 
   closeMenu() {
