@@ -35,10 +35,12 @@ export class MyApp {
     const authObserver = angularFireAuth.authState.subscribe(user => {
       if (user) {
         this.storageProvider.userId = user.uid;
+        this.authenticationProvider.logged = true;
         this.rootPage = TabsPage;
         authObserver.unsubscribe();
       } else {
         this.storageProvider.userId = "0"; //Usuario invitado
+        this.authenticationProvider.logged = false;
         this.rootPage = TabsPage;
         authObserver.unsubscribe();
       }

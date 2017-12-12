@@ -18,7 +18,6 @@ export class StorageProvider {
   books: any;
   userId: string;
   tab: number = 0;
-  subscription: Subscription;
 
 
   constructor(private angularFireDatabase: AngularFireDatabase,
@@ -44,12 +43,6 @@ export class StorageProvider {
     return this.angularFireDatabase.list(`users/${this.userId}`).valueChanges();
   }
 
-  loadCollection(){
-    this.subscription = this.getCollection().subscribe(books => {
-      this.booksDataProvider.booksFirebase = books;
-      this.booksDataProvider.booksCollection = this.booksDataProvider.booksFirebase.sort(this.booksDataProvider.sortByTitleAsc);
-    });
-  }
 
 
   /*******************

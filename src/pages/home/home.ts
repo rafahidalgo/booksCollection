@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class HomePage {
 
+  subscription: Subscription;
 
   constructor(private modalCtrl: ModalController,
               private navCtrl: NavController,
@@ -21,16 +22,18 @@ export class HomePage {
               private storageProvider: StorageProvider,
               private authenticationProvider: AuthenticationProvider) {
 
+
   }
 
   ionViewDidLoad() {
-    //Desde Firebase
     if (this.authenticationProvider.logged) {
-      this.storageProvider.loadCollection();
-      this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
+      this.subscription = this.storageProvider.getCollection().subscribe(books => {
+        this.booksDataProvider.booksFirebase = books;
+        this.booksDataProvider.booksCollection = this.booksDataProvider.booksFirebase;
+        this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
+      });
     } else {
-      //Desde LocalStorage
-      this.storageProvider.loadLocalStorage();
+      this.storageProvider.loadLocalStorage();      //Desde LocalStorage
       this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
     }
   }
@@ -41,8 +44,8 @@ export class HomePage {
   }
 
   ngOnDestroy() {
-    if (this.storageProvider.subscription) {
-      this.storageProvider.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
@@ -75,7 +78,7 @@ export class HomePage {
     this.navCtrl.push("DetailsPage", {"book": book});
   }
 
-  sortingActionSheet(){
+  sortingActionSheet() {
     this.booksDataProvider.presentActionSheet();
   }
 

@@ -21,7 +21,7 @@ export class SearchPage {
   title: String;
   author: String;
   isbn: String;
-  subs: Subscription;
+  subscription: Subscription;
 
   constructor(public navParams: NavParams,
               private booksDataProvider: BooksDataProvider,
@@ -34,7 +34,7 @@ export class SearchPage {
     this.author = this.navParams.get("author");
     this.isbn = this.navParams.get("isbn");
 
-    this.subs = this.booksDataProvider.getBooks(this.title, this.author, this.isbn).subscribe((books) => {
+    this.subscription = this.booksDataProvider.getBooks(this.title, this.author, this.isbn).subscribe((books) => {
         this.booksSearched = books["items"];
         this.messagesProvider.loading.dismiss();
       }
@@ -46,18 +46,11 @@ export class SearchPage {
     this.authenticationProvider.actualPage = "SearchPage";
   }
 
-  ionViewDidLeave() {
-    this.subs.unsubscribe();
-  }
-
   ngOnDestroy(){
-    if (this.subs) {
-      this.subs.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
-
-
-
 
   addBookToCollection(bookToAdd: any) {
     for (let books of this.booksDataProvider.booksCollection) {

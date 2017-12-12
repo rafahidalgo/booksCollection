@@ -105,22 +105,22 @@ export class BooksDataProvider {
 
     switch (mode) {
       case "titleAsc":
-        this.booksCollection = this.booksFirebase.sort(this.sortByTitleAsc);
+        this.booksCollection.sort(this.sortByTitleAsc);
         break;
       case "titleDesc":
-        this.booksCollection = this.booksFirebase.sort(this.sortByTitleDesc);
+        this.booksCollection.sort(this.sortByTitleDesc);
         break;
       case "pagesAsc":
-        this.booksCollection = this.booksFirebase.sort(this.sortByPagesAsc);
+        this.booksCollection.sort(this.sortByPagesAsc);
         break;
       case "pagesDesc":
-        this.booksCollection = this.booksFirebase.sort(this.sortByPagesDesc);
+        this.booksCollection.sort(this.sortByPagesDesc);
         break;
       case "publisherDateAsc":
-        this.booksCollection = this.booksFirebase.sort(this.sortByPublishedDateAsc);
+        this.booksCollection.sort(this.sortByPublishedDateAsc);
         break;
       case "publisherDateDesc":
-        this.booksCollection = this.booksFirebase.sort(this.sortByPublishedDateDesc);
+        this.booksCollection.sort(this.sortByPublishedDateDesc);
         break;
     }
 
