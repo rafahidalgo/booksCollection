@@ -14,8 +14,6 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class CoverPage {
 
-  subs: Subscription;
-
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private modalCtrl: ModalController,
@@ -30,10 +28,8 @@ export class CoverPage {
   ionViewDidLoad() {
     //Desde Firebase
     if (this.authenticationProvider.logged) {
-      this.subs = this.storageProvider.getCollection().subscribe(books => {
-        this.booksDataProvider.booksFirebase = books;
-        this.booksDataProvider.booksCollection = this.booksDataProvider.booksFirebase;
-      });
+      this.storageProvider.loadCollection();
+      this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
     } else {
       //Desde LocalStorage
       this.storageProvider.loadLocalStorage();
@@ -46,8 +42,8 @@ export class CoverPage {
   }
 
   ngOnDestroy(){
-    if (this.subs) {
-      this.subs.unsubscribe();
+    if (this.storageProvider.subscription) {
+      this.storageProvider.subscription.unsubscribe();
     }
   }
 
@@ -72,6 +68,10 @@ export class CoverPage {
   //Función repetida de HomePage
   goToDetails(book: Book) {
     this.navCtrl.push("DetailsPage", {"book": book});
+  }
+
+  sortingActionSheet(){
+    this.booksDataProvider.presentActionSheet();
   }
 
 }

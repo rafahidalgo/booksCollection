@@ -7,6 +7,7 @@ import { FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import * as firebase from 'firebase';
 import { Storage } from '@ionic/storage';
 import { Platform } from 'ionic-angular';
+import { Subscription } from 'rxjs/Subscription';
 
 //import * as firebase from 'firebase'
 
@@ -17,6 +18,7 @@ export class StorageProvider {
   books: any;
   userId: string;
   tab: number = 0;
+  subscription: Subscription;
 
 
   constructor(private angularFireDatabase: AngularFireDatabase,
@@ -25,9 +27,34 @@ export class StorageProvider {
               private platform: Platform) {
   }
 
-  uploadBook(book: Book) {
+
+  /***************
+   ** Firebase ***
+   ***************/
+
+  uploadBookFirebase(book: Book) {
     this.angularFireDatabase.object(`users/${this.userId}/${book.id}`).update(book);
   }
+
+  deleteBookFireBase(book: Book) {
+    this.angularFireDatabase.object(`users/${this.userId}/${book.id}`).remove();
+  }
+
+  getCollection(){
+    return this.angularFireDatabase.list(`users/${this.userId}`).valueChanges();
+  }
+
+  loadCollection(){
+    this.subscription = this.getCollection().subscribe(books => {
+      this.booksDataProvider.booksFirebase = books;
+      this.booksDataProvider.booksCollection = this.booksDataProvider.booksFirebase.sort(this.booksDataProvider.sortByTitleAsc);
+    });
+  }
+
+
+  /*******************
+   ** Local Storage **
+   *******************/
 
   saveLocalStorage() {
     let promise = new Promise((resolve, reject) => {
@@ -44,6 +71,31 @@ export class StorageProvider {
       }
     });
     return Promise;
+  }
+
+  loadLocalStorage() {
+    let promise = new Promise(((resolve, reject) => {
+      if (this.platform.is('cordova')) {
+        //Dispositivo
+        this.storage.ready().then(() => {
+          this.storage.get(`books${this.userId}`).then(books => {
+            if (books) { //Por si viniera vacío
+              this.booksDataProvider.booksCollection = books;
+            }
+            resolve();
+          });
+        });
+      } else {
+        //Escritorio
+        if (localStorage.getItem(`books${this.userId}`)) {
+          this.booksDataProvider.booksCollection = JSON.parse(localStorage.getItem(`books${this.userId}`));
+        }
+        resolve();
+      }
+
+    }));
+    return Promise;
+
   }
 
   saveLastTab(tab: number){
@@ -88,41 +140,7 @@ export class StorageProvider {
   }
 
 
-  deleteBookFireBase(book: Book) {
-    this.angularFireDatabase.object(`users/${this.userId}/${book.id}`).remove();
-  }
 
-  getCollection(){
-    return this.angularFireDatabase.list(`users/${this.userId}`).valueChanges();
-  }
 
-  /*retrieveCollectionFirebase(){
-
-  }*/
-
-  loadLocalStorage() {
-    let promise = new Promise(((resolve, reject) => {
-      if (this.platform.is('cordova')) {
-        //Dispositivo
-        this.storage.ready().then(() => {
-          this.storage.get(`books${this.userId}`).then(books => {
-            if (books) { //Por si viniera vacío
-              this.booksDataProvider.booksCollection = books;
-            }
-            resolve();
-          });
-        });
-      } else {
-        //Escritorio
-        if (localStorage.getItem(`books${this.userId}`)) {
-          this.booksDataProvider.booksCollection = JSON.parse(localStorage.getItem(`books${this.userId}`));
-        }
-        resolve();
-      }
-
-    }));
-    return Promise;
-
-  }
 
 }
