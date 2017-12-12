@@ -42,6 +42,7 @@ export class CoverPage {
 
   ionViewDidEnter() {
     this.storageProvider.saveLastTab(1);
+    this.authenticationProvider.actualPage="CoverPage";
   }
 
   ngOnDestroy(){

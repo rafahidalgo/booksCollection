@@ -9,7 +9,7 @@
   <ion-content>
     <ion-list>
 
-      <button *ngIf="!authenticationProvider.logged"
+      <button *ngIf="!authenticationProvider.logged && authenticationProvider.actualPage!='LoginPage'"
         ion-item (click)="openPage('LoginPage')">
         Iniciar sesión
       </button>
@@ -19,12 +19,9 @@
         Cerrar sesión
       </button>
 
-      <button ion-item (click)="openPage(homePage)">
+      <button *ngIf="authenticationProvider.actualPage=='LoginPage'"
+        ion-item (click)="openPage(tabsPage)">
         Colección
-      </button>
-
-      <button ion-item (click)="closeMenu()">
-        Cerrar Menú
       </button>
 
     </ion-list>

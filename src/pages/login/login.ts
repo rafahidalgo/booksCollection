@@ -35,6 +35,10 @@ export class LoginPage {
 
   }
 
+  ionViewDidEnter(){
+    this.authenticationProvider.actualPage = "LoginPage";
+  }
+
   login() {
     if (!this.loginForm.valid) {
       //TODO mostrar error

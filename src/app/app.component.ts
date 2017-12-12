@@ -16,7 +16,7 @@ import { HomePage } from '../pages/home/home';
 export class MyApp {
 
   rootPage: any;
-  homePage = HomePage;
+  tabsPage = TabsPage;
 
   constructor(platform: Platform,
               statusBar: StatusBar,

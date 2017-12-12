@@ -42,6 +42,10 @@ export class SearchPage {
 
   }
 
+  ionViewDidEnter(){
+    this.authenticationProvider.actualPage = "SearchPage";
+  }
+
   ionViewDidLeave() {
     this.subs.unsubscribe();
   }

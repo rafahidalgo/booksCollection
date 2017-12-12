@@ -7,6 +7,7 @@ import firebase from 'firebase/app'
 export class AuthenticationProvider {
 
   logged: boolean;
+  actualPage: string;
 
   constructor(private angularFireAuth: AngularFireAuth) {
   }

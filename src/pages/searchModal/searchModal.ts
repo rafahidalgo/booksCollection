@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, ViewController, LoadingController, Loading } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { MessagesProvider } from '../../providers/messages/messages';
+import { AuthenticationProvider } from '../../providers/authentication/authentication';
 
 
 @IonicPage()
@@ -18,7 +19,12 @@ export class SearchModalPage {
   constructor(private viewCtrl: ViewController,
               private barcodeScanner: BarcodeScanner,
               private messagesProvider: MessagesProvider,
-              private loadingCtrl: LoadingController) {
+              private loadingCtrl: LoadingController,
+              private authenticationProvider: AuthenticationProvider) {
+  }
+
+  ionViewDidEnter() {
+    this.authenticationProvider.actualPage = "SearchModalTab";
   }
 
   toSearchPage() {

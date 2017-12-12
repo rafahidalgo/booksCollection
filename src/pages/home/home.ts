@@ -41,6 +41,7 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.storageProvider.saveLastTab(0);
+    this.authenticationProvider.actualPage="HomePage";
   }
 
   ngOnDestroy(){
