@@ -9,7 +9,7 @@ export class BooksDataProvider {
 
   booksFirebase: any[] = [];
   booksCollection: Book[] = [];
-  sortingMode: string = "titleAsc";
+  sortingMode: string = "titleAsc"; //Ordenado por defecto por título ascendente
 
   constructor(private http: HttpClient,
               private actionSheetCtrl: ActionSheetController) {
@@ -101,7 +101,7 @@ export class BooksDataProvider {
     }
   }
 
-  sort(mode: string) {
+  sort(mode: string) { //Lo implemento a parte por si se quiere usar en algo que no sea un ActionSheet
 
     switch (mode) {
       case "titleAsc":
@@ -134,7 +134,7 @@ export class BooksDataProvider {
           text: 'Título (ascendente)',
           handler: () => {
             this.sortingMode = "titleAsc";
-            this.sort(this.sortingMode);
+            this.sort("titleAsc");
           }
         },
         {

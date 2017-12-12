@@ -31,6 +31,7 @@ export class HomePage {
     } else {
       //Desde LocalStorage
       this.storageProvider.loadLocalStorage();
+      this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
     }
   }
 

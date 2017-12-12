@@ -33,6 +33,7 @@ export class CoverPage {
     } else {
       //Desde LocalStorage
       this.storageProvider.loadLocalStorage();
+      this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
     }
   }
 
