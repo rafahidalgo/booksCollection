@@ -31,7 +31,7 @@
 
   <ion-list>
 
-    <ion-item>
+    <ion-item class="input-color">
       <ion-label floating>Título</ion-label>
       <ion-input type="text"
                  [(ngModel)]="title"
@@ -39,7 +39,7 @@
                  [disabled]="isbn.length>0"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="input-color">
       <ion-label floating>Autor</ion-label>
       <ion-input type="text"
                  [(ngModel)]="author"
@@ -47,7 +47,7 @@
                  [disabled]="isbn.length>0"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="input-color">
       <ion-label floating>ISBN</ion-label>
       <ion-input type="number" [(ngModel)]="isbn" clearInput="true"></ion-input>
     </ion-item>
@@ -56,7 +56,7 @@
 
 
   <button ion-button
-          color="primary"
+          color="secondary"
           block
           (click)="toSearchPage()">
     Buscar

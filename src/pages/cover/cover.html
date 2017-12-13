@@ -32,13 +32,14 @@
       <ion-col col-4 *ngFor="let book of booksDataProvider.booksCollection">
 
         <!-- Si existe carátula -->
-        <img *ngIf="book.volumeInfo.imageLinks"
+        <img class="img-cover"
+             *ngIf="book.volumeInfo.imageLinks"
              (click)="goToDetails(book)"
              [src]="book.volumeInfo.imageLinks.thumbnail" alt="portada">
         <!-- Si no existe carátula -->
         <label *ngIf="!book.volumeInfo.imageLinks"
                (click)="goToDetails(book)">
-          <img src="http://via.placeholder.com/150x180" alt="no-portada">
+          <img src="http://via.placeholder.com/126x126" alt="no-portada">
           <p>{{book.volumeInfo.title}}</p>
         </label>
 
@@ -49,7 +50,7 @@
 
   <ion-fab right bottom>
     <button ion-fab
-            color="primary"
+            color="light"
             (click)="searchModal()">
       <ion-icon name="add"></ion-icon>
     </button>

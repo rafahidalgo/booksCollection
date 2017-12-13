@@ -1,3 +1,26 @@
 page-details {
 
+
+
+  .details-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    white-space: normal;
+  }
+
+  .details-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    color: white;
+    text-align: right;
+  }
+
+  .ion-card.card{
+    background-color: #2e2e2e;
+  }
+
 }
