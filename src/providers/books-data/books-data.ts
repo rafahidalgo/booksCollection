@@ -77,29 +77,6 @@ export class BooksDataProvider {
     }
   }
 
-  sortByPagesAsc(a, b) {
-    if (a.volumeInfo.publishedDate < b.volumeInfo.publishedDate) {
-      return -1;
-    }
-    if (a.volumeInfo.publishedDate > b.volumeInfo.publishedDate) {
-      return 1;
-    }
-    if (a.volumeInfo.publishedDate = b.volumeInfo.publishedDate) {
-      return 0;
-    }
-  }
-
-  sortByPagesDesc(a, b) {
-    if (a.volumeInfo.publishedDate < b.volumeInfo.publishedDate) {
-      return 1;
-    }
-    if (a.volumeInfo.publishedDate > b.volumeInfo.publishedDate) {
-      return -1;
-    }
-    if (a.volumeInfo.publishedDate = b.volumeInfo.publishedDate) {
-      return 0;
-    }
-  }
 
   sort(mode: string) { //Lo implemento a parte por si se quiere usar en algo que no sea un ActionSheet
 
@@ -109,12 +86,6 @@ export class BooksDataProvider {
         break;
       case "titleDesc":
         this.booksCollection.sort(this.sortByTitleDesc);
-        break;
-      case "pagesAsc":
-        this.booksCollection.sort(this.sortByPagesAsc);
-        break;
-      case "pagesDesc":
-        this.booksCollection.sort(this.sortByPagesDesc);
         break;
       case "publisherDateAsc":
         this.booksCollection.sort(this.sortByPublishedDateAsc);
@@ -134,27 +105,13 @@ export class BooksDataProvider {
           text: 'Título (ascendente)',
           handler: () => {
             this.sortingMode = "titleAsc";
-            this.sort("titleAsc");
+            this.sort(this.sortingMode);
           }
         },
         {
           text: 'Título (descendente)',
           handler: () => {
             this.sortingMode = "titleDesc";
-            this.sort(this.sortingMode);
-          }
-        },
-        {
-          text: 'Número de páginas (ascendente)',
-          handler: () => {
-            this.sortingMode = "pagesAsc";
-            this.sort(this.sortingMode);
-          }
-        },
-        {
-          text: 'Número de páginas (descendente)',
-          handler: () => {
-            this.sortingMode = "pagesDesc";
             this.sort(this.sortingMode);
           }
         },
