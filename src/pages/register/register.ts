@@ -29,7 +29,8 @@ export class RegisterPage {
 
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      name: ['', Validators.compose([Validators.required, Validators.maxLength(20)])]
     });
 
   }
@@ -49,6 +50,7 @@ export class RegisterPage {
             this.messagesProvider.createBasicAlert(error.message);
           });
         });
+      this.authenticationProvider.name = this.registerForm.value.name;
       this.loading = this.loadingCtrl.create({
         dismissOnPageChange: true
       });

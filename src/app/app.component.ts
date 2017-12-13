@@ -55,9 +55,9 @@ export class MyApp {
 
   logout() {
     this.authenticationProvider.logout().then(() => {
-      this.authenticationProvider.logged = false;
       this.storageProvider.userId = "0";
       this.storageProvider.getCollection();
+      this.authenticationProvider.logged = false;
       this.openPage(TabsPage);
     });
   }

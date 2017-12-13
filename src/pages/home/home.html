@@ -26,7 +26,10 @@
 
 <ion-content padding>
 
-  <h1 *ngIf="booksDataProvider.booksCollection.length==0">No tienes ningún libro en la biblioteca.</h1>
+  <h1 *ngIf="booksDataProvider.booksCollection.length==0"
+      text-center>
+    No tienes ningún libro en la biblioteca.
+  </h1>
 
   <ion-list *ngIf="booksDataProvider.booksCollection.length>0">
     <ion-item *ngFor="let book of booksDataProvider.booksCollection">

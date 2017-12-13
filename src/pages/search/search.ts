@@ -42,14 +42,12 @@ export class SearchPage {
 
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.authenticationProvider.actualPage = "SearchPage";
   }
 
-  ngOnDestroy(){
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   addBookToCollection(bookToAdd: any) {

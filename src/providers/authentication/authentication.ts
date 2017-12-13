@@ -8,6 +8,7 @@ export class AuthenticationProvider {
 
   logged: boolean;
   actualPage: string;
+  name: string = "Invitado";
 
   constructor(private angularFireAuth: AngularFireAuth) {
   }
