@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
 
-    <ion-title>
+    <ion-title text-center>
       Books Collection
     </ion-title>
 
@@ -24,7 +24,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
   <h1 *ngIf="booksDataProvider.booksCollection.length==0"
       text-center>
@@ -32,32 +32,33 @@
   </h1>
 
   <ion-list *ngIf="booksDataProvider.booksCollection.length>0">
-    <ion-item *ngFor="let book of booksDataProvider.booksCollection">
-      <ion-thumbnail item-start>
+    <ion-item-sliding *ngFor="let book of booksDataProvider.booksCollection, let i = index">
+      <ion-item class="listStyle"
+                (click)="goToDetails(book)">
         <!-- Si existe carátula -->
-        <img *ngIf="book.volumeInfo.imageLinks"
+        <img class="img" *ngIf="book.volumeInfo.imageLinks"
              [src]="book.volumeInfo.imageLinks.thumbnail" alt="portada">
         <!-- Si no existe carátula -->
-        <img *ngIf="!book.volumeInfo.imageLinks"
+        <img class="img" *ngIf="!book.volumeInfo.imageLinks"
              src="http://via.placeholder.com/150x180" alt="no-portada">
-      </ion-thumbnail>
-      <h2>{{book.volumeInfo.title}}</h2>
-      <p>{{book.volumeInfo.authors}} · {{book.volumeInfo.publishedDate}}</p>
-      <ion-buttons>
+        <h1>{{book.volumeInfo.title}}</h1>
+        <h2>{{book.volumeInfo.authors}}</h2>
+        <h2>{{book.volumeInfo.publishedDate}}</h2>
+        <h2 *ngIf="book.volumeInfo.pageCount">
+          {{book.volumeInfo.pageCount}} páginas
+        </h2>
+      </ion-item>
+
+      <ion-item-options side="right">
         <button ion-button
-                clear
-                item-end
-                (click)="goToDetails(book)">
-          Detalles
+                color="danger"
+                icon-only
+                (click)="delete(book, i)">
+          <ion-icon name="trash"></ion-icon>
         </button>
-        <button ion-button
-                clear
-                item-end
-                (click)="delete(book)">
-          Borrar
-        </button>
-      </ion-buttons>
-    </ion-item>
+      </ion-item-options>
+
+    </ion-item-sliding>
   </ion-list>
 
   <ion-fab right bottom>

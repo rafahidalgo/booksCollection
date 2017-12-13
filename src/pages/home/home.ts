@@ -65,10 +65,10 @@ export class HomePage {
     this.navCtrl.push('SearchPage', {'title': title, 'author': author, 'isbn': isbn});
   }
 
-  delete(book: Book) {
-    let index = this.booksDataProvider.booksCollection.indexOf(book);
+  delete(book: Book, index: number) {
     if (this.authenticationProvider.logged) {
       this.storageProvider.deleteBookFireBase(book); //borrar libro de firebase
+      this.storageProvider.saveLocalStorage(); //Guardar el array sin el libro borrado en localStorage
     }
     this.booksDataProvider.booksCollection.splice(index, 1); //borrar libro del array
     this.storageProvider.saveLocalStorage(); //Guardar el array sin el libro borrado en localStorage

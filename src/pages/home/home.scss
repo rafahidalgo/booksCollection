@@ -1,4 +1,25 @@
 page-home {
 
+  .img {
+    float: left;
+    height: 130px;
+    width: 88px;
+    margin-right: 15px;
+  }
+
+  .listStyle {
+    color: white;
+    background-color: dimgray;
+    height: 150px;
+  }
+
+  h1, h2, p {
+    white-space: normal;
+  }
+
+  .scroll-content {
+    background-color: #222222;
+  }
+
 
 }

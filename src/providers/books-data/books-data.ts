@@ -166,7 +166,7 @@ export class BooksDataProvider {
           }
         },
         {
-          text: 'Fecha de publicación (ascendente)',
+          text: 'Fecha de publicación (descendente)',
           handler: () => {
             this.sortingMode = "publisherDateDesc";
             this.sort(this.sortingMode);
