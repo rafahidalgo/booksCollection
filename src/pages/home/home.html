@@ -31,10 +31,15 @@
   <ion-list *ngIf="booksDataProvider.booksCollection.length>0">
     <ion-item *ngFor="let book of booksDataProvider.booksCollection">
       <ion-thumbnail item-start>
-        <img [src]="book.volumeInfo.imageLinks.smallThumbnail">
+        <!-- Si existe carátula -->
+        <img *ngIf="book.volumeInfo.imageLinks"
+             [src]="book.volumeInfo.imageLinks.thumbnail" alt="portada">
+        <!-- Si no existe carátula -->
+        <img *ngIf="!book.volumeInfo.imageLinks"
+             src="http://via.placeholder.com/150x180" alt="no-portada">
       </ion-thumbnail>
       <h2>{{book.volumeInfo.title}}</h2>
-      <p>{{book.volumeInfo.authors}} • {{book.volumeInfo.publishedDate}}</p>
+      <p>{{book.volumeInfo.authors}} · {{book.volumeInfo.publishedDate}}</p>
       <ion-buttons>
         <button ion-button
                 clear
