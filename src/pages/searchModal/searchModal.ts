@@ -28,6 +28,13 @@ export class SearchModalPage {
   }
 
   toSearchPage() {
+
+    //Si están todos los campos vacíos
+    if (!this.isbn && !this.author && !this.title) {
+      this.messagesProvider.createBasicAlert("Por favor, introduce algún criterio de búsqueda");
+      return;
+    }
+
     if (this.isbn.length > 0) {
       if (this.isbn.length == 13 && (this.isbn.startsWith("978") || this.isbn.startsWith("979"))) {
         this.viewCtrl.dismiss({title: this.title, author: this.author, isbn: this.isbn});
