@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Book } from '../../models/book.model';
 import { Observable } from 'rxjs/Observable';
 import { ActionSheetController } from 'ionic-angular';

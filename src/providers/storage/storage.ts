@@ -1,16 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Book } from '../../models/book.model';
-import { Observable } from 'rxjs/Observable';
 import { BooksDataProvider } from '../books-data/books-data';
-import { FirebaseObjectObservable } from 'angularfire2/database-deprecated';
-import * as firebase from 'firebase';
 import { Storage } from '@ionic/storage';
 import { Platform } from 'ionic-angular';
-import { Subscription } from 'rxjs/Subscription';
-
-//import * as firebase from 'firebase'
-
 
 @Injectable()
 export class StorageProvider {
@@ -50,7 +43,7 @@ export class StorageProvider {
    *******************/
 
   saveLocalStorage() {
-    let promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve) => {
       if (this.platform.is('cordova')) {
         //Device
         this.storage.ready().then(() => {
@@ -63,11 +56,11 @@ export class StorageProvider {
         resolve();
       }
     });
-    return Promise;
+    return promise;
   }
 
   loadLocalStorage() {
-    let promise = new Promise(((resolve, reject) => {
+    let promise = new Promise(((resolve) => {
       if (this.platform.is('cordova')) {
         //Dispositivo
         this.storage.ready().then(() => {
@@ -87,12 +80,12 @@ export class StorageProvider {
       }
 
     }));
-    return Promise;
+    return promise;
 
   }
 
   saveLastTab(tab: number){
-    let promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve) => {
       if (this.platform.is('cordova')) {
         //Device
         this.storage.ready().then(() => {
@@ -105,11 +98,11 @@ export class StorageProvider {
         resolve();
       }
     });
-    return Promise;
+    return promise;
   }
 
   loadLastTab(){
-    let promise = new Promise(((resolve, reject) => {
+    let promise = new Promise(((resolve) => {
       if (this.platform.is('cordova')) {
         //Dispositivo
         this.storage.ready().then(() => {
@@ -129,7 +122,7 @@ export class StorageProvider {
       }
 
     }));
-    return Promise;
+    return promise;
   }
 
 

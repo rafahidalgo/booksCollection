@@ -3,7 +3,6 @@ import { IonicPage, NavController, LoadingController, Loading } from 'ionic-angu
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
 import { EmailValidator } from '../../validators/email';
-import { HomePage } from '../home/home';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
 import { TabsPage } from '../tabs/tabs';

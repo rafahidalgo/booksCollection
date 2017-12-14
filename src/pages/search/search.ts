@@ -1,12 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
-import { IonicPage, Loading, LoadingController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, LoadingController, NavParams } from 'ionic-angular';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
-import { Book } from '../../models/book.model';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
 import { Observable } from 'rxjs/Observable';
-import { SearchModalPage } from '../searchModal/searchModal';
 import { Subscription } from 'rxjs/Subscription';
 
 
@@ -67,11 +65,5 @@ export class SearchPage {
     console.log("local guardado!");
     this.messagesProvider.createToast("Libro añadido con éxito", 1000, "middle");
   }
-
-  newSearch() {
-    //TODO Implementar nueva búsqueda
-  }
-
-  //TODO Implementar búsqueda mediante captura de código de barras
 
 }
