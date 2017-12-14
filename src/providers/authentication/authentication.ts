@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -7,7 +8,7 @@ export class AuthenticationProvider {
 
   logged: boolean;
   actualPage: string;
-  name: string = "Invitado";
+  email: string = "Invitado";
 
   constructor(private angularFireAuth: AngularFireAuth) {
   }

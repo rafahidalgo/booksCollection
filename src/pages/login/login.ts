@@ -32,7 +32,7 @@ export class LoginPage {
 
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.authenticationProvider.actualPage = "LoginPage";
   }
 
@@ -44,6 +44,7 @@ export class LoginPage {
         .then(authenticationData => {
           this.storageProvider.userId = authenticationData.uid;
           this.authenticationProvider.logged = true;
+          this.authenticationProvider.email = authenticationData.email;
           this.navCtrl.setRoot(TabsPage);
         }, error => {
           this.loading.dismiss().then(() => {

@@ -28,8 +28,7 @@ export class RegisterPage {
 
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      name: ['', Validators.compose([Validators.required, Validators.maxLength(20)])]
+      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     });
 
   }
@@ -43,13 +42,13 @@ export class RegisterPage {
         .then((authenticationData) => {
           this.storageProvider.userId = authenticationData.uid;
           this.authenticationProvider.logged = true;
+          this.authenticationProvider.email = authenticationData.email;
           this.navCtrl.setRoot(TabsPage);
         }, error => {
           this.loading.dismiss().then(() => {
             this.messagesProvider.createBasicAlert(error.message);
           });
         });
-      this.authenticationProvider.name = this.registerForm.value.name;
       this.loading = this.loadingCtrl.create({
         dismissOnPageChange: true
       });

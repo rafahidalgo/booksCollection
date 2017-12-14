@@ -7,7 +7,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { StorageProvider } from '../providers/storage/storage';
 import { AuthenticationProvider } from '../providers/authentication/authentication';
 import { TabsPage } from '../pages/tabs/tabs';
-import { HomePage } from '../pages/home/home';
 
 
 @Component({
@@ -58,13 +57,11 @@ export class MyApp {
       this.storageProvider.userId = "0";
       this.storageProvider.getCollection();
       this.authenticationProvider.logged = false;
+      this.authenticationProvider.email = "Invitado";
       this.openPage(TabsPage);
     });
   }
 
-  closeMenu() {
-    this.menuCtrl.close();
-  }
 
 }
 

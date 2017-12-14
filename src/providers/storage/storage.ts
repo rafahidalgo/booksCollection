@@ -36,8 +36,6 @@ export class StorageProvider {
     return this.angularFireDatabase.list(`users/${this.userId}`).valueChanges();
   }
 
-
-
   /*******************
    ** Local Storage **
    *******************/
