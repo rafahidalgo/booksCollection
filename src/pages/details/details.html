@@ -13,48 +13,27 @@
 
 <ion-content padding>
 
-  <ion-card >
+  <ion-card>
+
+    <ion-item class="title-card">
+      <h1>{{book.volumeInfo.title}}</h1>
+      <h2>{{book.volumeInfo.authors}}</h2>
+    </ion-item>
 
     <ion-card-content>
-      <ion-item text-center>
-        <h1>{{book.volumeInfo.title}}</h1>
-        <h2>{{book.volumeInfo.authors}}</h2>
+      <ion-item class="details">
+        <h3>Editorial: {{book.volumeInfo.publisher}}</h3>
+        <h3>Fecha de publicación: {{book.volumeInfo.publishedDate}}</h3>
+        <h3>Páginas: {{book.volumeInfo.pageCount}} páginas</h3>
+        <h3><a href="book.volumeInfo.infoLink">Preview</a></h3>
       </ion-item>
-
-      <ion-item>
-        <ion-row>
-
-          <ion-col col-6 class="details-left">
-            <h3>{{book.volumeInfo.publisher}}</h3>
-            <h3>{{book.volumeInfo.publishedDate}}</h3>
-            <h3>{{book.volumeInfo.languaje}}</h3>
-          </ion-col>
-
-          <ion-col col-6 class="details-right">
-            <h3>{{book.volumeInfo.maturityRating}}</h3>
-            <h3>{{book.volumeInfo.categories}}</h3>
-            <h3><a href="{{book.volumeInfo.previewLink}}">Preview</a></h3>
-          </ion-col>
-
-        </ion-row>
-      </ion-item>
-
-
-      <div class="imgDetail">
-        <!-- Si existe carátula -->
-        <img *ngIf="book.volumeInfo.imageLinks"
-             [src]="book.volumeInfo.imageLinks.thumbnail" alt="portada">
-        <!-- Si no existe carátula -->
-        <img *ngIf="!book.volumeInfo.imageLinks"
-             src="http://via.placeholder.com/150x180"
-             alt="no-portada">
-      </div>
-
-      <p>{{book.volumeInfo.description}}</p>
+      <img class="img-detail" [src]="book.volumeInfo.imageLinks.thumbnail">
+      <p class="description">{{book.volumeInfo.description}}</p>
 
     </ion-card-content>
 
   </ion-card>
+
 
 </ion-content>
 

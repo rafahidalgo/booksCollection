@@ -1,26 +1,43 @@
 page-details {
 
-
-
-  .details-left {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: white;
-    white-space: normal;
+  .scroll-content {
+    background-color: #444444;
   }
 
-  .details-right {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 150px;
-    color: white;
-    text-align: right;
+  a {
+    color: #AAAAAA;
   }
 
-  .ion-card.card{
-    background-color: #2e2e2e;
+  .title-card {
+    background-color: #333333;
+    text-align: center;
+    border: 1px #AAAAAA dotted;
   }
+
+  .details {
+    background-color: #333333;
+    color: #AAAAAA;
+  }
+
+  .img-detail {
+    float: left;
+    margin: 5px;
+    height: 180px;
+    width: 132px;
+  }
+
+  .description {
+    background-color: #333333;
+    color: #AAAAAA;
+  }
+
+  ion-card-content {
+    background-color: #333333;
+  }
+
+
+
+
+
 
 }
