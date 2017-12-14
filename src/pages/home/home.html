@@ -34,24 +34,29 @@
   <ion-list *ngIf="booksDataProvider.booksCollection.length>0">
     <ion-item-sliding *ngFor="let book of booksDataProvider.booksCollection, let i = index">
       <ion-item class="item-list"
-        (click)="goToDetails(book)">
+                (click)="goToDetails(book)">
         <!-- Si existe carátula -->
         <img class="img-collection" *ngIf="book.volumeInfo.imageLinks"
              [src]="book.volumeInfo.imageLinks.thumbnail" alt="portada">
         <!-- Si no existe carátula -->
         <img class="img-collection" *ngIf="!book.volumeInfo.imageLinks"
              src="http://via.placeholder.com/150x180" alt="no-portada">
-        <h1>{{book.volumeInfo.title}}</h1>
-        <h2>{{book.volumeInfo.authors}}</h2>
-        <h2>{{book.volumeInfo.publishedDate}}</h2>
-        <p *ngIf="book.volumeInfo.pageCount"
-        style="color:white">
-          {{book.volumeInfo.pageCount}} páginas
-        </p>
-        <p *ngIf="book.volumeInfo.averageRating"
-          class="rating">
-          <ion-icon name="thumbs-up"></ion-icon> {{book.volumeInfo.averageRating}}
-        </p>
+
+        <div class="text-list">
+          <h1>{{book.volumeInfo.title}}</h1>
+          <h2>{{book.volumeInfo.authors}}</h2>
+          <h2>{{book.volumeInfo.publishedDate}}</h2>
+          <p *ngIf="book.volumeInfo.pageCount"
+             style="color:white">
+            {{book.volumeInfo.pageCount}} páginas
+          </p>
+          <p *ngIf="book.volumeInfo.averageRating"
+             class="rating">
+            <ion-icon name="thumbs-up"></ion-icon>
+            {{book.volumeInfo.averageRating}}
+          </p>
+        </div>
+
       </ion-item>
 
       <ion-item-options side="right">

@@ -102,6 +102,7 @@ export class BooksDataProvider {
       title: 'Ordenar por:',
       buttons: [
         {
+          icon: 'arrow-up',
           text: 'Título (ascendente)',
           handler: () => {
             this.sortingMode = "titleAsc";
@@ -109,6 +110,7 @@ export class BooksDataProvider {
           }
         },
         {
+          icon: 'arrow-down',
           text: 'Título (descendente)',
           handler: () => {
             this.sortingMode = "titleDesc";
@@ -116,6 +118,7 @@ export class BooksDataProvider {
           }
         },
         {
+          icon: 'arrow-up',
           text: 'Fecha de publicación (ascendente)',
           handler: () => {
             this.sortingMode = "publisherDateAsc";
@@ -123,6 +126,7 @@ export class BooksDataProvider {
           }
         },
         {
+          icon: 'arrow-down',
           text: 'Fecha de publicación (descendente)',
           handler: () => {
             this.sortingMode = "publisherDateDesc";
@@ -130,6 +134,7 @@ export class BooksDataProvider {
           }
         },
         {
+          icon: 'close',
           text: 'Cancel',
           role: 'cancel',
         }
