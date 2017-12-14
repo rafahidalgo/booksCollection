@@ -16,13 +16,23 @@
 
 
 
-
-
-
-
-h1, h2 {
+h1, h2, h3 {
   white-space: normal;
-  color: #eeeeee;
+  color: #ffffff;
+}
+
+.scroll-content {
+  background-color: #b8b8b8;
+}
+
+.menu-button{
+  background-color: #777777;
+  color: white;
+}
+
+.input-forms {
+  background-color: #c9c9c9;
+  color: black;
 }
 
 

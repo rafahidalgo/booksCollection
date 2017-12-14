@@ -23,18 +23,18 @@
 
   <form [formGroup]="loginForm" (submit)="login()" novalidate>
 
-    <ion-item>
-      <ion-label float>Email</ion-label>
-      <ion-input #email formControlName="email" type="email" required></ion-input>
+    <ion-item class="input-forms">
+      <ion-label floating color="primary" float>Email</ion-label>
+      <ion-input formControlName="email" type="email" required></ion-input>
     </ion-item>
 
     <!--<ion-item *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">
       <p>Please enter a valid email.</p>
     </ion-item>-->
 
-    <ion-item>
-      <ion-label float>Password</ion-label>
-      <ion-input #password formControlName="password" type="password" required></ion-input>
+    <ion-item class="input-forms">
+      <ion-label floating color="primary" >Contraseña</ion-label>
+      <ion-input formControlName="password" type="password" required></ion-input>
     </ion-item>
     <!--
         <ion-item *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
@@ -44,17 +44,17 @@
     <button ion-button
             block
             type="submit">
-      Login
+      Iniciar sesión
     </button>
 
   </form>
 
   <button ion-button block clear (click)="goToResetPassword()">
-    Reset Password
+    ¿Olvidaste la contraseña?
   </button>
 
   <button ion-button block clear (click)="goToRegister()">
-    Create a new account
+    Crear una nueva cuenta
   </button>
 
 </ion-content>

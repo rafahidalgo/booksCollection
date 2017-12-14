@@ -13,22 +13,41 @@
 
 <ion-content padding>
 
-  <ion-card>
+  <ion-card style="background-color: #333333">
 
     <ion-item class="title-card">
-      <h1>{{book.volumeInfo.title}}</h1>
-      <h2>{{book.volumeInfo.authors}}</h2>
+      <h1 class="title">{{book.volumeInfo.title}}</h1>
+      <h2 class="color">{{book.volumeInfo.authors}}</h2>
     </ion-item>
 
     <ion-card-content>
       <ion-item class="details">
-        <h3>Editorial: {{book.volumeInfo.publisher}}</h3>
-        <h3>Fecha de publicación: {{book.volumeInfo.publishedDate}}</h3>
-        <h3>Páginas: {{book.volumeInfo.pageCount}} páginas</h3>
-        <h3><a href="book.volumeInfo.infoLink">Preview</a></h3>
+
+        <h3 *ngIf="book.volumeInfo.publisher"
+            class="color">
+          Editorial: {{book.volumeInfo.publisher}}
+        </h3>
+        <h3 *ngIf="book.volumeInfo.publishedDate"
+            class="color">
+          Fecha de publicación: {{book.volumeInfo.publishedDate}}
+        </h3>
+        <h3 *ngIf="book.volumeInfo.pageCount"
+            class="color">
+          Páginas: {{book.volumeInfo.pageCount}} páginas
+        </h3>
+        <h3 *ngIf="book.volumeInfo.previewLink"
+            class="color">
+          <a [href]="book.volumeInfo.previewLink">Preview</a>
+        </h3>
+
       </ion-item>
-      <img class="img-detail" [src]="book.volumeInfo.imageLinks.thumbnail">
+
+      <img *ngIf="book.volumeInfo.imageLinks"
+           class="img-detail"
+           [src]="book.volumeInfo.imageLinks.thumbnail">
+
       <p class="description">{{book.volumeInfo.description}}</p>
+      <p class="description" *ngIf="!book.volumeInfo.description">Descripción no disponible</p>
 
     </ion-card-content>
 

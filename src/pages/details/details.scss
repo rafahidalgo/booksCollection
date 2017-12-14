@@ -11,7 +11,8 @@ page-details {
   .title-card {
     background-color: #333333;
     text-align: center;
-    border: 1px #AAAAAA dotted;
+    white-space: normal;
+    color: #AAAAAA;
   }
 
   .details {
@@ -35,9 +36,13 @@ page-details {
     background-color: #333333;
   }
 
+  .title {
+    color: #CCCCCC;
+    text-transform: uppercase;
+  }
 
-
-
-
+  .color {
+    color: #BBBBBB
+  }
 
 }
