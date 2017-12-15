@@ -1,6 +1,6 @@
 {
   "name": "BooksCollection",
-  "app_id": "2438f6f4",
+  "app_id": "81e27a68",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
