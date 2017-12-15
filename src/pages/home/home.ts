@@ -68,7 +68,6 @@ export class HomePage {
   delete(book: Book, index: number) {
     if (this.authenticationProvider.logged) {
       this.storageProvider.deleteBookFireBase(book); //borrar libro de firebase
-      this.storageProvider.saveLocalStorage(); //Guardar el array sin el libro borrado en localStorage
     }
     this.booksDataProvider.booksCollection.splice(index, 1); //borrar libro del array
     this.storageProvider.saveLocalStorage(); //Guardar el array sin el libro borrado en localStorage

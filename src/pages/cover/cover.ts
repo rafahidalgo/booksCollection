@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController } from 'ionic-angular';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { Book } from '../../models/book.model';
@@ -15,9 +15,9 @@ import { Subscription } from 'rxjs/Subscription';
 export class CoverPage {
 
   subscription: Subscription;
+  remove: boolean = false;
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
               private modalCtrl: ModalController,
               private messagesProvider: MessagesProvider,
               public booksDataProvider: BooksDataProvider,
@@ -43,6 +43,10 @@ export class CoverPage {
     this.authenticationProvider.actualPage = "CoverPage";
   }
 
+  ionViewDidLeave(){
+    this.remove=false; //Al cambiar de página o pestaña se desactiva el modo borrar
+  }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -51,6 +55,7 @@ export class CoverPage {
 
   //Función repetida de HomePage
   searchModal() {
+    this.remove = false; //Si buscamos se desactiva el modo borrar
     let modal = this.modalCtrl.create('SearchModalPage');
     modal.present();
     modal.onDidDismiss(data => {
@@ -74,6 +79,27 @@ export class CoverPage {
 
   sortingActionSheet() {
     this.booksDataProvider.presentActionSheet();
+  }
+
+  removeToggle(){
+    this.remove = !this.remove;
+    //Si no hay libros siempre estará desactivado
+    if (this.booksDataProvider.booksCollection.length==0) {
+      this.remove = false;
+    }
+    console.log("libros:" + this.booksDataProvider.booksCollection.length);
+    console.log(this.remove);
+  }
+
+
+  //Función repetida de HomePage
+  delete(book: Book, index: number) {
+    if (this.authenticationProvider.logged) {
+      this.storageProvider.deleteBookFireBase(book); //borrar libro de firebase
+    }
+    this.booksDataProvider.booksCollection.splice(index, 1); //borrar libro del array
+    this.storageProvider.saveLocalStorage(); //Guardar el array sin el libro borrado en localStorage
+    console.log("Borrado: " + book)
   }
 
 }

@@ -19,6 +19,12 @@
               (click)="sortingActionSheet()">
         <ion-icon name="funnel"></ion-icon>
       </button>
+      <button ion-button
+              icon-only
+              (click)="removeToggle()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+
     </ion-buttons>
 
   </ion-navbar>
@@ -27,21 +33,56 @@
 
 <ion-content>
 
+  <ion-card *ngIf="booksDataProvider.booksCollection.length==0"
+            text-center>
+    <ion-card-content style="text-align: left">
+      <h2 class="text-card">
+        Todavía no tienes ningún libro añadido a la colección.
+      </h2>
+      <br>
+      <h2 class="text-card">
+        Regístrate para guardar tu colección en la nube y poder acceder a ella desde cualquier dispositivo.
+      </h2>
+      <br>
+      <h2 class="text-card">
+        Si no te apetece registrarte, igualmente estará segura en este dispositivo.
+      </h2>
+    </ion-card-content>
+  </ion-card>
+
+
   <ion-grid>
     <ion-row>
-      <ion-col col-4 *ngFor="let book of booksDataProvider.booksCollection">
-
+      <ion-col col-4 *ngFor="let book of booksDataProvider.booksCollection, let i = index">
+        <!-- Modo detalles -->
         <!-- Si existe carátula -->
-        <img *ngIf="book.volumeInfo.imageLinks"
-             (click)="goToDetails(book)"
-             [src]="book.volumeInfo.imageLinks.thumbnail" alt="portada">
-        <!-- Si no existe carátula -->
-        <label *ngIf="!book.volumeInfo.imageLinks"
-               (click)="goToDetails(book)">
-          <img src="http://via.placeholder.com/126x126" alt="no-portada">
-          <p>{{book.volumeInfo.title}}</p>
-        </label>
-
+        <div style="position: relative">
+          <img *ngIf="book.volumeInfo.imageLinks"
+               (click)="goToDetails(book)"
+               [src]="book.volumeInfo.imageLinks.thumbnail" alt="portada">
+          <button *ngIf="remove"
+                  ion-button
+                  round
+                  (click)="delete(book, i)"
+                  icon-only
+                  class="delete-button">
+            <ion-icon name="trash" style="color: red"></ion-icon>
+          </button>
+          <!-- Si no existe carátula -->
+          <label *ngIf="!book.volumeInfo.imageLinks"
+                 (click)="goToDetails(book)">
+            <img src="http://via.placeholder.com/126x126" alt="no-portada">
+            <p>{{book.volumeInfo.title}}</p>
+          </label>
+          <button *ngIf="remove"
+                  ion-button
+                  round
+                  (click)="delete(book, i)"
+                  icon-only
+                  class="delete-button">
+            <ion-icon name="trash" style="color: red"></ion-icon>
+          </button>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
