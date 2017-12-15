@@ -26,10 +26,23 @@
 
 <ion-content>
 
-  <h1 *ngIf="booksDataProvider.booksCollection.length==0"
-      text-center>
-    No tienes ningún libro en la biblioteca.
-  </h1>
+  <ion-card *ngIf="booksDataProvider.booksCollection.length==0"
+            text-center>
+    <ion-card-content style="text-align: left">
+      <h2 class="text-card">
+        Todavía no tienes ningún libro añadido a la colección.
+      </h2>
+      <br>
+      <h2 class="text-card">
+        Regístrate para guardar tu colección en la nube y poder acceder a ella desde cualquier dispositivo.
+      </h2>
+      <br>
+      <h2 class="text-card">
+        Si no te apetece registrarte, igualmente estará segura en este dispositivo.
+      </h2>
+    </ion-card-content>
+  </ion-card>
+
 
   <ion-list *ngIf="booksDataProvider.booksCollection.length>0">
     <ion-item-sliding *ngFor="let book of booksDataProvider.booksCollection, let i = index">
@@ -49,11 +62,6 @@
           <p *ngIf="book.volumeInfo.pageCount"
              style="color:white">
             {{book.volumeInfo.pageCount}} páginas
-          </p>
-          <p *ngIf="book.volumeInfo.averageRating"
-             class="rating">
-            <ion-icon name="thumbs-up"></ion-icon>
-            {{book.volumeInfo.averageRating}}
           </p>
         </div>
 
