@@ -35,11 +35,13 @@ export class MyApp {
       if (user) {
         this.storageProvider.userId = user.uid;
         this.authenticationProvider.logged = true;
+        this.authenticationProvider.email = user.email;
         this.rootPage = TabsPage;
         authObserver.unsubscribe();
       } else {
         this.storageProvider.userId = "0"; //Usuario invitado
         this.authenticationProvider.logged = false;
+        this.authenticationProvider.email = "Invitado";
         this.rootPage = TabsPage;
         authObserver.unsubscribe();
       }
