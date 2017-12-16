@@ -3,7 +3,7 @@
   <ion-navbar color="primary">
 
     <ion-title text-center>
-      Búsqueda
+      Resultados
     </ion-title>
 
   </ion-navbar>
@@ -13,7 +13,8 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let book of booksSearched"
-              class="item-list">
+              class="item-list"
+              (click)="addBookToCollection(book)">
 
       <ion-row>
 
@@ -27,31 +28,15 @@
           </p>
         </ion-col>
 
-        <ion-col col-7>
+        <ion-col col-9>
           <div class="text-list">
-            <h1>{{book.volumeInfo.title}}</h1>
-            <h2>{{book.volumeInfo.authors}}</h2>
-            <h2>{{book.volumeInfo.publisher}}</h2>
-            <h2>{{book.volumeInfo.publishedDate}}</h2>
+            <h2 id="title">{{book.volumeInfo.title}}</h2>
+            <h3 class="truncated-text italics">{{book.volumeInfo.authors}}</h3>
+            <h3 class="italics">{{book.volumeInfo.publisher}}</h3>
+            <h3 class="italics">{{book.volumeInfo.publishedDate}}</h3>
           </div>
         </ion-col>
-
-        <ion-col col-2>
-          <button ion-button
-                  class="add-button"
-                  icon-only
-                  (click)="addBookToCollection(book)">
-            <ion-icon name="add"></ion-icon>
-          </button>
-        </ion-col>
       </ion-row>
-
-
-
-
-
-
-
 
     </ion-item>
   </ion-list>
