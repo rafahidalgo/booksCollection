@@ -16,8 +16,8 @@ import { AuthenticationProvider } from '../authentication/authentication';
 export class StorageProvider {
 
   books: any;
-  userId: string;
-  tab: number = 0;
+  userId: string;  //Identificador para la base de datos
+  tab: number = 0; //Para saber en qué tab estamos al salir
 
 
   constructor(private angularFireDatabase: AngularFireDatabase,
@@ -58,13 +58,13 @@ export class StorageProvider {
   saveLocalStorage() {
     return new Promise(resolve => {
       if (this.platform.is('cordova')) {
-        //Device
+        //Dispositivo
         this.storage.ready().then(() => {
           this.storage.set(`books${this.userId}`, this.booksDataProvider.booksCollection);
           resolve();
         });
       } else {
-        //Desktop
+        //Escritorio
         localStorage.setItem(`books${this.userId}`, JSON.stringify(this.booksDataProvider.booksCollection));
         resolve();
       }
@@ -96,13 +96,13 @@ export class StorageProvider {
   saveLastTab(tab: number) {
     return new Promise(resolve => {
       if (this.platform.is('cordova')) {
-        //Device
+        //Dispositivo
         this.storage.ready().then(() => {
           this.storage.set(`tab${this.userId}`, tab);
           resolve();
         });
       } else {
-        //Desktop
+        //Escritorio
         localStorage.setItem(`tab${this.userId}`, JSON.stringify(tab));
         resolve();
       }

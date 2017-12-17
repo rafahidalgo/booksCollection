@@ -33,10 +33,9 @@ export class ResetPasswordPage {
 
   resetPassword() {
     if (!this.resetPasswordForm.valid) {
-      //TODO mostrar error
-      console.log(this.resetPasswordForm.value);
+      this.messagesProvider.createBasicAlert("Introduce los datos correctamente");
     } else {
-      this.authenticationProvider.resetPassword(this.resetPasswordForm.value.email).then(user => {
+      this.authenticationProvider.resetPassword(this.resetPasswordForm.value.email).then(() => {
         this.alertCtrl.create({
           message: "Se ha enviado un correo para resetear el password de la cuenta",
           buttons: [

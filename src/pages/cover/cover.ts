@@ -29,21 +29,24 @@ export class CoverPage {
               private storageProvider: StorageProvider,
               private authenticationProvider: AuthenticationProvider) {
 
+    //si nos logueamos, guardamos en local la colección
     if (this.authenticationProvider.logged) {
       this.loadCollection().then(() => {
         this.subscription.unsubscribe();
       });
     }
+    //cargamos la coleccion del local
     this.storageProvider.loadLocalStorage();
-    this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
+    this.booksDataProvider.sort(this.booksDataProvider.sortingMode); //ordenamos
 
   }
 
   ionViewDidEnter() {
-    this.storageProvider.saveLastTab(1);
-    this.authenticationProvider.actualPage = "CoverPage";
+    this.storageProvider.saveLastTab(1); //para saber el tab en el que lo dejamos
+    this.authenticationProvider.actualPage = "CoverPage"; //para saber que botones mostramos en el menú
   }
 
+  //cargamos y salvamos en local
   loadCollection() {
     return new Promise(resolve => {
       this.subscription = this.storageProvider.getCollection().subscribe(books => {
@@ -59,7 +62,6 @@ export class CoverPage {
     this.remove = false; //Al cambiar de página o pestaña se desactiva el modo borrar
   }
 
-  //Función repetida de HomePage
   searchModal() {
     this.remove = false; //Si buscamos se desactiva el modo borrar
     let modal = this.modalCtrl.create('SearchModalPage');
@@ -93,10 +95,8 @@ export class CoverPage {
     }
   }
 
-
   delete(book: Book, index: number) {
     this.storageProvider.delete(book, index);
   }
-
 
 }

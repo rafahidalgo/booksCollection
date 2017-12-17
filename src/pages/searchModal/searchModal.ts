@@ -67,8 +67,6 @@ export class SearchModalPage {
       } else {
         this.messagesProvider.createBasicAlert("No es un libro");
       }
-      //TODO hay que identificar libros con isbn de 10 dígitos
-      //TODO desactivar entradas de titulo y autor si se busca por isbn
     }, (err) => {
       this.messagesProvider.createBasicAlert(`Error: ${err}`);
     });

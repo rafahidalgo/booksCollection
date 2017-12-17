@@ -27,13 +27,14 @@ export class MyApp {
               private menuCtrl: MenuController,
               public authenticationProvider: AuthenticationProvider,
               private booksDataProvider: BooksDataProvider) {
+
     platform.ready().then(() => {
-
-
       statusBar.styleDefault();
       splashScreen.hide();
     });
 
+
+    //Comprobamos si ya estaba logueado o no para no tener que loguear siempre
     const authObserver = angularFireAuth.authState.subscribe(user => {
       if (user) {
         this.storageProvider.userId = user.uid;
@@ -60,11 +61,10 @@ export class MyApp {
   logout() {
     this.authenticationProvider.logout().then(() => {
       this.storageProvider.userId = "0";
-      this.storageProvider.getCollection();
       this.authenticationProvider.logged = false;
       this.authenticationProvider.email = "Invitado";
-      this.storageProvider.loadLocalStorage();      //Desde LocalStorage
-      this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
+      this.storageProvider.loadLocalStorage();      //cargamos datos del local para mostrarlos una vez deslogueados
+      this.booksDataProvider.sort(this.booksDataProvider.sortingMode); //los colocamos
       this.openPage('TabsPage');
     });
   }

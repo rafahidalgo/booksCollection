@@ -47,7 +47,7 @@ export class LoginPage {
         .then(authenticationData => {
           this.storageProvider.userId = authenticationData.uid;
           this.authenticationProvider.logged = true;
-          this.authenticationProvider.email = authenticationData.email;
+          this.authenticationProvider.email = authenticationData.email; //Para mostrar si estás logueado
           this.navCtrl.setRoot('TabsPage');
         }, error => {
           this.loading.dismiss().then(() => {

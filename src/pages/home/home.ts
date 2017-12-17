@@ -27,21 +27,24 @@ export class HomePage {
               private storageProvider: StorageProvider,
               private authenticationProvider: AuthenticationProvider) {
 
+    //si nos logueamos, guardamos en local la colección
     if (this.authenticationProvider.logged) {
       this.loadCollection().then(()=>{
         this.subscription.unsubscribe();
       });
     }
+    //cargamos la coleccion del local
     this.storageProvider.loadLocalStorage();
-    this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
+    this.booksDataProvider.sort(this.booksDataProvider.sortingMode); //ordenamos
 
   }
 
   ionViewDidEnter() {
-    this.storageProvider.saveLastTab(0);
-    this.authenticationProvider.actualPage = "HomePage";
+    this.storageProvider.saveLastTab(0); //para saber el tab en el que lo dejamos
+    this.authenticationProvider.actualPage = "HomePage"; //para saber que botones mostramos en el menú
   }
 
+  //cargamos y salvamos en local
   loadCollection(){
     return new Promise(resolve => {
       this.subscription = this.storageProvider.getCollection().subscribe(books => {

@@ -11,6 +11,7 @@ export class MessagesProvider {
               private alertCtrl: AlertController) {
   }
 
+  //Toast
   createToast(message: string, duration: number, position: string) {
     this.toastCtrl.create({
       message: message,
@@ -19,6 +20,7 @@ export class MessagesProvider {
     }).present();
   }
 
+  //Alert
   createBasicAlert(message: string) {
     this.alertCtrl.create({
       message: message,

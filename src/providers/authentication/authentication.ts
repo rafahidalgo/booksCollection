@@ -7,9 +7,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class AuthenticationProvider {
 
-  logged: boolean;
-  actualPage: string;
-  email: string = "Invitado";
+  logged: boolean; //para saber si cargar y guardar de firebase
+  actualPage: string; //para saber en qué página estamos y mostrar el menú en consecuencia
+  email: string = "Invitado"; //para mostrar cuando estés o no logueado
 
   constructor(private angularFireAuth: AngularFireAuth) {
   }

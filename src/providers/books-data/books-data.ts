@@ -11,7 +11,7 @@ import { Book } from '../../models/book.model';
 export class BooksDataProvider {
 
   booksFirebase: any[] = [];
-  booksCollection: Book[] = [];
+  booksCollection: Book[] = []; //Colección
   sortingMode: string = "titleAsc"; //Ordenado por defecto por título ascendente
 
   constructor(private http: HttpClient,
@@ -19,6 +19,7 @@ export class BooksDataProvider {
 
   }
 
+  //Obtenemos los libros del api según distintos criterios
   getBooks(title: String, author: String, isbn: String): Observable<any> {
     if (title && author && !isbn) {
       return this.http.get(`https://www.googleapis.com/books/v1/volumes?q="${title}"+inauthor:${author}&key=AIzaSyC4bVaIsHrFcf01d0daPuYH9MYx2jZpfLQ`);
@@ -31,6 +32,10 @@ export class BooksDataProvider {
     }
 
   }
+
+  /**********+**************
+   * Métodos de ordenación *
+   *************************/
 
   sortByTitleAsc(a, b) {
     if (a.volumeInfo.title < b.volumeInfo.title) {
@@ -100,6 +105,7 @@ export class BooksDataProvider {
 
   }
 
+  //Implementación del actionsheet para mostrar los métodos de ordenación
   presentActionSheet() {
     this.actionSheetCtrl.create({
       title: 'Ordenar por:',

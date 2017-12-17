@@ -43,7 +43,7 @@ export class RegisterPage {
         .then((authenticationData) => {
           this.storageProvider.userId = authenticationData.uid;
           this.authenticationProvider.logged = true;
-          this.authenticationProvider.email = authenticationData.email;
+          this.authenticationProvider.email = authenticationData.email; //Para poner el correo cuando te registras (y por tanto quedas logueado)
           this.navCtrl.setRoot('TabsPage');
         }, error => {
           this.loading.dismiss().then(() => {
