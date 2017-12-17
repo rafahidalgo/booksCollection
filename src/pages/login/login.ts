@@ -37,7 +37,7 @@ export class LoginPage {
 
   login() {
     if (!this.loginForm.valid) {
-      //TODO mostrar error
+        this.messagesProvider.createBasicAlert("Introduce los datos correctamente");
     } else {
       this.authenticationProvider.login(this.loginForm.value.email, this.loginForm.value.password)
         .then(authenticationData => {

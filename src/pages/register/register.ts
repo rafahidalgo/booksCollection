@@ -33,8 +33,7 @@ export class RegisterPage {
 
   register() {
     if (!this.registerForm.valid) {
-      //TODO mostrar error
-      console.log(this.registerForm.value);
+      this.messagesProvider.createBasicAlert("Introduce los datos correctamente. Recuerda que la contraseña debe tener al menos 6 caracteres");
     } else {
       this.authenticationProvider.register(this.registerForm.value.email, this.registerForm.value.password)
         .then((authenticationData) => {
