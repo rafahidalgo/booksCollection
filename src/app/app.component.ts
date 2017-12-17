@@ -7,6 +7,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { StorageProvider } from '../providers/storage/storage';
 import { AuthenticationProvider } from '../providers/authentication/authentication';
 import { TabsPage } from '../pages/tabs/tabs';
+import * as firebase from 'firebase';
+import FacebookAuthProvider = firebase.auth.FacebookAuthProvider;
+import { BooksDataProvider } from '../providers/books-data/books-data';
 
 
 @Component({
@@ -23,7 +26,8 @@ export class MyApp {
               angularFireAuth: AngularFireAuth,
               private storageProvider: StorageProvider,
               private menuCtrl: MenuController,
-              public authenticationProvider: AuthenticationProvider) {
+              public authenticationProvider: AuthenticationProvider,
+              private booksDataProvider: BooksDataProvider) {
     platform.ready().then(() => {
 
 
@@ -60,6 +64,8 @@ export class MyApp {
       this.storageProvider.getCollection();
       this.authenticationProvider.logged = false;
       this.authenticationProvider.email = "Invitado";
+      this.storageProvider.loadLocalStorage();      //Desde LocalStorage
+      this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
       this.openPage(TabsPage);
     });
   }

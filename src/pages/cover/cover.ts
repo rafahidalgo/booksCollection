@@ -23,19 +23,15 @@ export class CoverPage {
               public booksDataProvider: BooksDataProvider,
               private storageProvider: StorageProvider,
               private authenticationProvider: AuthenticationProvider) {
-  }
 
-  ionViewDidLoad() {
     if (this.authenticationProvider.logged) {
-      this.subscription = this.storageProvider.getCollection().subscribe(books => {
-        this.booksDataProvider.booksFirebase = books;
-        this.booksDataProvider.booksCollection = this.booksDataProvider.booksFirebase;
-        this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
+      this.loadCollection().then(()=>{
+        this.subscription.unsubscribe();
       });
-    } else {
-      this.storageProvider.loadLocalStorage();      //Desde LocalStorage
-      this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
     }
+    this.storageProvider.loadLocalStorage();
+    this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
+
   }
 
   ionViewDidEnter() {
@@ -43,14 +39,19 @@ export class CoverPage {
     this.authenticationProvider.actualPage = "CoverPage";
   }
 
-  ionViewDidLeave(){
-    this.remove=false; //Al cambiar de página o pestaña se desactiva el modo borrar
+  loadCollection(){
+    return new Promise(resolve => {
+      this.subscription = this.storageProvider.getCollection().subscribe(books => {
+        this.booksDataProvider.booksFirebase = books;
+        this.booksDataProvider.booksCollection = this.booksDataProvider.booksFirebase;
+        this.storageProvider.saveLocalStorage();
+        resolve();
+      });
+    });
   }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+  ionViewDidLeave(){
+    this.remove=false; //Al cambiar de página o pestaña se desactiva el modo borrar
   }
 
   //Función repetida de HomePage
@@ -87,8 +88,6 @@ export class CoverPage {
     if (this.booksDataProvider.booksCollection.length==0) {
       this.remove = false;
     }
-    console.log("libros:" + this.booksDataProvider.booksCollection.length);
-    console.log(this.remove);
   }
 
 
@@ -101,5 +100,6 @@ export class CoverPage {
     this.storageProvider.saveLocalStorage(); //Guardar el array sin el libro borrado en localStorage
     console.log("Borrado: " + book)
   }
+
 
 }

@@ -57,12 +57,9 @@ export class SearchPage {
     }
     if (this.authenticationProvider.logged) {
       this.storageProvider.uploadBookFirebase(bookToAdd); //Guardar libro en firebase
-      console.log("Firebase guardado!");
     }
     this.booksDataProvider.booksCollection.push(bookToAdd); //Añadir libro al array de libros
-    console.log("array guardado!");
     this.storageProvider.saveLocalStorage(); //Guardar el array con el nuevo libro en localStorage
-    console.log("local guardado!");
     this.messagesProvider.createToast("Libro añadido con éxito", 1000, "middle");
   }
 
