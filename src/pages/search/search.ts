@@ -59,6 +59,7 @@ export class SearchPage {
       this.storageProvider.uploadBookFirebase(bookToAdd); //Guardar libro en firebase
     }
     this.booksDataProvider.booksCollection.push(bookToAdd); //Añadir libro al array de libros
+    this.booksDataProvider.sort(this.booksDataProvider.sortingMode); //Ordeno el array según el criterio de ordenación
     this.storageProvider.saveLocalStorage(); //Guardar el array con el nuevo libro en localStorage
     this.messagesProvider.createToast("Libro añadido con éxito", 1000, "middle");
   }
