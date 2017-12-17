@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, Loading, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationProvider } from '../../providers/authentication/authentication';
+
+//validators
 import { EmailValidator } from '../../validators/email';
+
+//providers
+import { AuthenticationProvider } from '../../providers/authentication/authentication';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
 

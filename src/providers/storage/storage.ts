@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { Book } from '../../models/book.model';
-import { BooksDataProvider } from '../books-data/books-data';
-import { Storage } from '@ionic/storage';
 import { Platform } from 'ionic-angular';
+
+//models
+import { Book } from '../../models/book.model';
+
+//plugins
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Storage } from '@ionic/storage';
+
+//providers
+import { BooksDataProvider } from '../books-data/books-data';
 import { AuthenticationProvider } from '../authentication/authentication';
 
 @Injectable()
@@ -41,7 +47,7 @@ export class StorageProvider {
     this.angularFireDatabase.object(`users/${this.userId}/${book.id}`).remove();
   }
 
-  getCollection(){
+  getCollection() {
     return this.angularFireDatabase.list(`users/${this.userId}`).valueChanges();
   }
 
@@ -87,7 +93,7 @@ export class StorageProvider {
     });
   }
 
-  saveLastTab(tab: number){
+  saveLastTab(tab: number) {
     return new Promise(resolve => {
       if (this.platform.is('cordova')) {
         //Device
@@ -103,7 +109,7 @@ export class StorageProvider {
     });
   }
 
-  loadLastTab(){
+  loadLastTab() {
     return new Promise(resolve => {
       if (this.platform.is('cordova')) {
         //Dispositivo

@@ -3,7 +3,10 @@ import { Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+//plugins
 import { AngularFireAuth } from 'angularfire2/auth';
+
+//providers
 import { StorageProvider } from '../providers/storage/storage';
 import { AuthenticationProvider } from '../providers/authentication/authentication';
 import { BooksDataProvider } from '../providers/books-data/books-data';

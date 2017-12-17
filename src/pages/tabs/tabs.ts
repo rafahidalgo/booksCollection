@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { StorageProvider } from '../../providers/storage/storage';
 import { IonicPage } from 'ionic-angular';
+
+//providers
+import { StorageProvider } from '../../providers/storage/storage';
+
 
 @IonicPage()
 @Component({

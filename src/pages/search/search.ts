@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+
+//providers
 import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+
 
 
 @IonicPage()

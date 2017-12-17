@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+//models
 import { Book } from '../../models/book.model';
+
+//providers
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
 
 

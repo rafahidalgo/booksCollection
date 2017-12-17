@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
-import { BooksDataProvider } from '../../providers/books-data/books-data';
+import { Subscription } from 'rxjs/Subscription';
+
+//models
 import { Book } from '../../models/book.model';
+
+//providers
+import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
-import { Subscription } from 'rxjs/Subscription';
 
 @IonicPage()
 @Component({

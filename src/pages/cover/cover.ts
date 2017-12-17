@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController } from 'ionic-angular';
+import { Subscription } from 'rxjs/Subscription';
+
+//models
+import { Book } from '../../models/book.model';
+
+//providers
 import { MessagesProvider } from '../../providers/messages/messages';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
-import { Book } from '../../models/book.model';
 import { StorageProvider } from '../../providers/storage/storage';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
-import { Subscription } from 'rxjs/Subscription';
+
 
 @IonicPage()
 @Component({
@@ -25,7 +30,7 @@ export class CoverPage {
               private authenticationProvider: AuthenticationProvider) {
 
     if (this.authenticationProvider.logged) {
-      this.loadCollection().then(()=>{
+      this.loadCollection().then(() => {
         this.subscription.unsubscribe();
       });
     }
@@ -39,7 +44,7 @@ export class CoverPage {
     this.authenticationProvider.actualPage = "CoverPage";
   }
 
-  loadCollection(){
+  loadCollection() {
     return new Promise(resolve => {
       this.subscription = this.storageProvider.getCollection().subscribe(books => {
         this.booksDataProvider.booksFirebase = books;
@@ -50,8 +55,8 @@ export class CoverPage {
     });
   }
 
-  ionViewDidLeave(){
-    this.remove=false; //Al cambiar de página o pestaña se desactiva el modo borrar
+  ionViewDidLeave() {
+    this.remove = false; //Al cambiar de página o pestaña se desactiva el modo borrar
   }
 
   //Función repetida de HomePage
@@ -80,10 +85,10 @@ export class CoverPage {
     this.booksDataProvider.presentActionSheet();
   }
 
-  removeToggle(){
+  removeToggle() {
     this.remove = !this.remove;
     //Si no hay libros siempre estará desactivado
-    if (this.booksDataProvider.booksCollection.length==0) {
+    if (this.booksDataProvider.booksCollection.length == 0) {
       this.remove = false;
     }
   }

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+
+//plugins
 import { AngularFireAuth } from 'angularfire2/auth';
 
 
