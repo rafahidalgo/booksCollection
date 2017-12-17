@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, LoadingController, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams } from 'ionic-angular';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
@@ -24,7 +24,6 @@ export class SearchPage {
   constructor(public navParams: NavParams,
               private booksDataProvider: BooksDataProvider,
               private messagesProvider: MessagesProvider,
-              private loadingCtrl: LoadingController,
               private storageProvider: StorageProvider,
               private authenticationProvider: AuthenticationProvider) {
 

@@ -5,7 +5,6 @@ import { AuthenticationProvider } from '../../providers/authentication/authentic
 import { EmailValidator } from '../../validators/email';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
-import { TabsPage } from '../tabs/tabs';
 
 
 @IonicPage()
@@ -45,7 +44,7 @@ export class LoginPage {
           this.storageProvider.userId = authenticationData.uid;
           this.authenticationProvider.logged = true;
           this.authenticationProvider.email = authenticationData.email;
-          this.navCtrl.setRoot(TabsPage);
+          this.navCtrl.setRoot('TabsPage');
         }, error => {
           this.loading.dismiss().then(() => {
             this.messagesProvider.createBasicAlert("No hay ningún usuario con esa dirección de correo");

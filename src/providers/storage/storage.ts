@@ -50,7 +50,7 @@ export class StorageProvider {
    *******************/
 
   saveLocalStorage() {
-    let promise = new Promise((resolve) => {
+    return new Promise(resolve => {
       if (this.platform.is('cordova')) {
         //Device
         this.storage.ready().then(() => {
@@ -63,11 +63,10 @@ export class StorageProvider {
         resolve();
       }
     });
-    return promise;
   }
 
   loadLocalStorage() {
-    let promise = new Promise(((resolve) => {
+    return new Promise(resolve => {
       if (this.platform.is('cordova')) {
         //Dispositivo
         this.storage.ready().then(() => {
@@ -85,14 +84,11 @@ export class StorageProvider {
         }
         resolve();
       }
-
-    }));
-    return promise;
-
+    });
   }
 
   saveLastTab(tab: number){
-    let promise = new Promise((resolve) => {
+    return new Promise(resolve => {
       if (this.platform.is('cordova')) {
         //Device
         this.storage.ready().then(() => {
@@ -105,11 +101,10 @@ export class StorageProvider {
         resolve();
       }
     });
-    return promise;
   }
 
   loadLastTab(){
-    let promise = new Promise(((resolve) => {
+    return new Promise(resolve => {
       if (this.platform.is('cordova')) {
         //Dispositivo
         this.storage.ready().then(() => {
@@ -127,13 +122,7 @@ export class StorageProvider {
         }
         resolve();
       }
-
-    }));
-    return promise;
+    });
   }
-
-
-
-
 
 }

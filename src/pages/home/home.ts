@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController } from 'ionic-angular';
 import { BooksDataProvider } from '../../providers/books-data/books-data';
 import { Book } from '../../models/book.model';
 import { MessagesProvider } from '../../providers/messages/messages';
@@ -7,6 +7,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
 import { Subscription } from 'rxjs/Subscription';
 
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'

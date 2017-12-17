@@ -5,7 +5,6 @@ import { AuthenticationProvider } from '../../providers/authentication/authentic
 import { EmailValidator } from '../../validators/email';
 import { MessagesProvider } from '../../providers/messages/messages';
 import { StorageProvider } from '../../providers/storage/storage';
-import { TabsPage } from '../tabs/tabs';
 
 
 @IonicPage()
@@ -16,7 +15,6 @@ import { TabsPage } from '../tabs/tabs';
 export class RegisterPage {
 
   registerForm: FormGroup;
-
   loading: Loading;
 
   constructor(public navCtrl: NavController,
@@ -43,7 +41,7 @@ export class RegisterPage {
           this.storageProvider.userId = authenticationData.uid;
           this.authenticationProvider.logged = true;
           this.authenticationProvider.email = authenticationData.email;
-          this.navCtrl.setRoot(TabsPage);
+          this.navCtrl.setRoot('TabsPage');
         }, error => {
           this.loading.dismiss().then(() => {
             this.messagesProvider.createBasicAlert(error.message);

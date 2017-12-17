@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { HomePage } from '../home/home';
 import { StorageProvider } from '../../providers/storage/storage';
+import { IonicPage } from 'ionic-angular';
 
-
+@IonicPage()
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html',
@@ -13,7 +13,7 @@ export class TabsPage {
   tab2: any;
 
   constructor(public storageProvider: StorageProvider) {
-    this.tab1 = HomePage;
+    this.tab1 = 'HomePage';
     this.tab2 = "CoverPage";
     this.storageProvider.loadLastTab();
   }

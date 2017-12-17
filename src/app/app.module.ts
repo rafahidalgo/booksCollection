@@ -3,12 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
-
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import {TabsPage} from '../pages/tabs/tabs';
-import { BooksDataProvider } from '../providers/books-data/books-data';
 import { HttpClientModule } from '@angular/common/http';
 
 //plugins
@@ -19,9 +14,12 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+
+//providers
 import { AuthenticationProvider } from '../providers/authentication/authentication';
 import { MessagesProvider } from '../providers/messages/messages';
 import { StorageProvider } from '../providers/storage/storage';
+import { BooksDataProvider } from '../providers/books-data/books-data';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr2rBFMRaNmrN6VTF_JzQpT4kLX_OZiG4",
@@ -34,9 +32,7 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,
-    TabsPage
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -49,9 +45,7 @@ export const firebaseConfig = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    TabsPage
+    MyApp
   ],
   providers: [
     StatusBar,

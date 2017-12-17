@@ -6,9 +6,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { StorageProvider } from '../providers/storage/storage';
 import { AuthenticationProvider } from '../providers/authentication/authentication';
-import { TabsPage } from '../pages/tabs/tabs';
-import * as firebase from 'firebase';
-import FacebookAuthProvider = firebase.auth.FacebookAuthProvider;
 import { BooksDataProvider } from '../providers/books-data/books-data';
 
 
@@ -18,7 +15,6 @@ import { BooksDataProvider } from '../providers/books-data/books-data';
 export class MyApp {
 
   rootPage: any;
-  tabsPage = TabsPage;
 
   constructor(platform: Platform,
               statusBar: StatusBar,
@@ -40,13 +36,13 @@ export class MyApp {
         this.storageProvider.userId = user.uid;
         this.authenticationProvider.logged = true;
         this.authenticationProvider.email = user.email;
-        this.rootPage = TabsPage;
+        this.rootPage = 'TabsPage';
         authObserver.unsubscribe();
       } else {
         this.storageProvider.userId = "0"; //Usuario invitado
         this.authenticationProvider.logged = false;
         this.authenticationProvider.email = "Invitado";
-        this.rootPage = TabsPage;
+        this.rootPage = 'TabsPage';
         authObserver.unsubscribe();
       }
     });
@@ -66,7 +62,7 @@ export class MyApp {
       this.authenticationProvider.email = "Invitado";
       this.storageProvider.loadLocalStorage();      //Desde LocalStorage
       this.booksDataProvider.sort(this.booksDataProvider.sortingMode);
-      this.openPage(TabsPage);
+      this.openPage('TabsPage');
     });
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { ToastController, AlertController, Loading } from 'ionic-angular';
 
 
 @Injectable()
@@ -8,8 +8,7 @@ export class MessagesProvider {
   loading: Loading;
 
   constructor(private  toastCtrl: ToastController,
-              private alertCtrl: AlertController,
-              private loadingCtrl: LoadingController) {
+              private alertCtrl: AlertController) {
   }
 
   createToast(message: string, duration: number, position: string) {

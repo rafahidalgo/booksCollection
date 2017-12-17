@@ -55,8 +55,8 @@
     <ion-row>
       <ion-col col-4 *ngFor="let book of booksDataProvider.booksCollection, let i = index">
         <!-- Modo detalles -->
-        <!-- Si existe carátula -->
         <div style="position: relative">
+          <!-- Si existe carátula -->
           <img *ngIf="book.volumeInfo.imageLinks"
                (click)="goToDetails(book)"
                [src]="book.volumeInfo.imageLinks.thumbnail" alt="portada">
@@ -70,7 +70,7 @@
           </button>
           <!-- Si no existe carátula -->
           <div *ngIf="!book.volumeInfo.imageLinks"
-                 (click)="goToDetails(book)">
+               (click)="goToDetails(book)">
             <img class="img-unavailable" src="../../assets/imgs/Imagen_no_disponible.svg" alt="portada no disponible">
             <p class="text-list">{{book.volumeInfo.title}}</p>
           </div>
