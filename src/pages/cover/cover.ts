@@ -68,12 +68,10 @@ export class CoverPage {
     });
   }
 
-  //Función repetida de HomePage
   searchBooks(title: String, author: String, isbn: Number) {
     this.navCtrl.push('SearchPage', {'title': title, 'author': author, 'isbn': isbn});
   }
 
-  //Función repetida de HomePage
   goToDetails(book: Book) {
     this.navCtrl.push("DetailsPage", {"book": book});
   }
@@ -91,14 +89,8 @@ export class CoverPage {
   }
 
 
-  //Función repetida de HomePage
   delete(book: Book, index: number) {
-    if (this.authenticationProvider.logged) {
-      this.storageProvider.deleteBookFireBase(book); //borrar libro de firebase
-    }
-    this.booksDataProvider.booksCollection.splice(index, 1); //borrar libro del array
-    this.storageProvider.saveLocalStorage(); //Guardar el array sin el libro borrado en localStorage
-    console.log("Borrado: " + book)
+    this.storageProvider.delete(book, index);
   }
 
 

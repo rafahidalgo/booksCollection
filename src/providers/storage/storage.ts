@@ -4,6 +4,7 @@ import { Book } from '../../models/book.model';
 import { BooksDataProvider } from '../books-data/books-data';
 import { Storage } from '@ionic/storage';
 import { Platform } from 'ionic-angular';
+import { AuthenticationProvider } from '../authentication/authentication';
 
 @Injectable()
 export class StorageProvider {
@@ -16,9 +17,17 @@ export class StorageProvider {
   constructor(private angularFireDatabase: AngularFireDatabase,
               private booksDataProvider: BooksDataProvider,
               private storage: Storage,
-              private platform: Platform) {
+              private platform: Platform,
+              private authenticationProvider: AuthenticationProvider) {
   }
 
+  delete(book: Book, index: number) {
+    if (this.authenticationProvider.logged) {
+      this.deleteBookFireBase(book); //borrar libro de firebase
+    }
+    this.booksDataProvider.booksCollection.splice(index, 1); //borrar libro del array
+    this.saveLocalStorage(); //Guardar el array sin el libro borrado en localStorage
+  }
 
   /***************
    ** Firebase ***
