@@ -48,12 +48,17 @@
     <ion-item-sliding *ngFor="let book of booksDataProvider.booksCollection, let i = index">
       <ion-item class="item-list"
                 (click)="goToDetails(book)">
+
         <!-- Si existe carátula -->
-        <img class="img-collection" *ngIf="book.volumeInfo.imageLinks"
-             [src]="book.volumeInfo.imageLinks.thumbnail" alt="portada">
+        <img *ngIf="book.volumeInfo.imageLinks"
+             class="img-collection"
+             [src]="book.volumeInfo.imageLinks.thumbnail"
+             alt="portada">
         <!-- Si no existe carátula -->
-        <img class="img-collection" *ngIf="!book.volumeInfo.imageLinks"
-             src="http://via.placeholder.com/150x180" alt="no-portada">
+        <img *ngIf="!book.volumeInfo.imageLinks"
+             class="img-collection"
+             src="../../assets/imgs/Imagen_no_disponible.svg"
+             alt="portada no disponible">
 
         <div class="text-list">
           <h1>{{book.volumeInfo.title}}</h1>

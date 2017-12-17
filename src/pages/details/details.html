@@ -42,9 +42,14 @@
 
       </ion-item>
 
+      <!-- Si hay carátula -->
       <img *ngIf="book.volumeInfo.imageLinks"
            class="img-detail"
            [src]="book.volumeInfo.imageLinks.thumbnail">
+      <!-- Si no hay carátula -->
+      <img *ngIf="!book.volumeInfo.imageLinks"
+           class="img-detail"
+           src="../../assets/imgs/Imagen_no_disponible.svg" alt="portada no disponible">
 
       <p class="description">{{book.volumeInfo.description}}</p>
       <p class="description" *ngIf="!book.volumeInfo.description">Descripción no disponible</p>

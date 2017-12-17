@@ -69,11 +69,12 @@
             <ion-icon name="trash" style="color: red"></ion-icon>
           </button>
           <!-- Si no existe carátula -->
-          <label *ngIf="!book.volumeInfo.imageLinks"
+          <div *ngIf="!book.volumeInfo.imageLinks"
                  (click)="goToDetails(book)">
-            <img src="http://via.placeholder.com/126x126" alt="no-portada">
-            <p>{{book.volumeInfo.title}}</p>
-          </label>
+            <img class="img-unavailable" src="../../assets/imgs/Imagen_no_disponible.svg" alt="portada no disponible">
+            <p class="text-list">{{book.volumeInfo.title}}</p>
+          </div>
+
           <button *ngIf="remove"
                   ion-button
                   round

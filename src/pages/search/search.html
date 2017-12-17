@@ -19,13 +19,15 @@
       <ion-row>
 
         <ion-col col-3>
+          <!--Si existe imagen-->
           <img *ngIf="book.volumeInfo.imageLinks"
                [src]="book.volumeInfo.imageLinks.thumbnail"
                class="img-list">
-          <p *ngIf="!book.volumeInfo.imageLinks"
-             class="text-list">
-            Imagen no disponible
-          </p>
+          <!--Si no existe imagen-->
+          <img *ngIf="!book.volumeInfo.imageLinks"
+               src="../../assets/imgs/Imagen_no_disponible.svg"
+               alt="portada no disponible"
+               class="img-list"/>
         </ion-col>
 
         <ion-col col-9>
